@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+
+/* For all elements */
+* {
+    --headerTextColor: rgb(148, 154, 164);
+    --headerBGColor: #26344B; /* Primary 3 */
+    --topNavigationBarTextColor: #CFD0E2; /* Secondary 1 1 */
+    --topNavigationBarBGColor: #080927; /* Secondary 1 5 */
+    --topNavigationBarButtonsColor: #5C5D84; /* Secondary 1 2 */
+    --pageTextColor: #C6D6DB; /* Secondary 2 1 */
+    --pageBGColor: #041C23; /* Secondary 2 5 */
+    --articleBGColor: rgb(32, 32, 32);
+    --rightColumnTextColor: rgb(207, 208, 226);
+    --rightColumnBGColor: var(--pageBGColor); /* Secondary 2 5 */
+    --footerTextColor: #C6D6DB; /* Secondary 2 1 */
+    --footerBGColor: #03141a; /* Secondary 2 5 */
+    --footerBorderColor: #4E6D76;
+    --fakeImgBGColor: black;
+
+    /* Include padding and border in the element's total width and height */
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    padding: 10px;
+    color: var(--pageTextColor);
+    background-color: var(--pageBGColor);
+}
+
+.header {
+    padding: 30px;
+    text-align: center;
+    color: var(--headerTextColor);
+    background-color: var(--headerBGColor);
+    border-bottom: 4px solid var(--pageBGColor);
+}
+
+.header h1 {
+    font-size: 4em;
+}
+
+.topNavigationBar {
+    overflow: hidden;
+    color: var(--topNavigationBarTextColor);
+    background-color: var(--topNavigationBarBGColor);
+}
+/* Buttons in the navigation bar */
+.topNavigationBar a {
+    float: left;
+    color: var(--topNavigationBarTextColor);
+    background-color: var(--topNavigationBarButtonsColor);
+    text-align: center;
+    /* padding top&bottom right&left */
+    padding: 10px 16px;
+    /* Remove links underlining */
+    text-decoration: none;
+    text-shadow: 1px 1px 0px var(--topNavigationBarBGColor);
+    border-left: 2px solid var(--pageBGColor);
+    border-right: 2px solid var(--pageBGColor);
+}
+
+/* Change colour on navigation bar buttons hover */
+.topNavigationBar a:hover {
+    background-color: var(--topNavigationBarTextColor);
+    color: var(--topNavigationBarBGColor);
+    text-shadow: none;
+}
+.topNavigationBar .gitHubLogo {
+    float: right;
+    padding: 2px 10px 0px 10px;
+    color:  var(--topNavigationBarTextColor);
+    fill: var(--topNavigationBarTextColor);
+}
+.topNavigationBar .gitHubLogo:hover {
+    fill: var(--topNavigationBarBGColor);
+}
+
+.leftColumn {
+    float: left;
+    width: 75%;
+    border-right: 1px dotted var(--pageTextColor);
+}
+
+.rightColumn {
+    float: left;
+    width: 25%;
+    background-color: var(--rightColumnBGColor);
+    padding-left: 10px;
+}
+
+.fakeImage {
+    background-color: var(--fakeImgBGColor);
+    width: 100%;
+    padding: 20px;
+}
+
+.article {
+    background-color: var(--articleBGColor);
+    padding: 15px;
+    margin-bottom: 10px;
+}
+.pageContents {
+    margin-top: 5px;
+    border-top: 1px solid var(--topNavigationBarButtonsColor);
+}
+/* Clears floats after the columns */
+.pageContents:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.footer {
+    padding: 20px;
+    text-align: center;
+    color: var(--footerTextColor);
+    background-color: var(--footerBGColor);
+    margin-top: 20px;
+    border-top: 1px solid var(--footerBorderColor);
+    border-bottom: 1px solid var(--footerBorderColor);
+}
+
+/* Responsive layout - when the screen is less than 800px wide, 
+make the two columns stack on top of each other instead of next 
+to each other */
+@media screen and (max-width: 800px) {
+    .leftColumn, .rightColumn {   
+        width: 100%;
+        padding: 0;
+    }
+}
+
+/* Responsive layout - when the screen is less than 400px wide, 
+make the navigation links stack on top of each other instead of 
+next to each other */
+@media screen and (max-width: 400px) {
+    .topNavigationBar a {
+        float: none;
+        width: 100%;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Famous Fractals</h1>
+  <p>I am a fan of fractals and here I will tell you about my favourite toys.</p>
+</div>
+
+<div class="topNavigationBar">
+    <a href="#">Link</a>
+    <a href="#">Link</a>
+    <a href="#">Link</a>
+    <a class="gitHubLogo" href="https://github.com/shenshin">
+        <!-- Scalable Vector Graphics GitHub cat logo-->
+        <svg height="32" width="32" viewBox="0 0 16 16" version="1.1" aria-hidden="true">
+            <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+        </svg>
+    </a>
+</div>
+
+<div class="pageContents">
+  <div class="leftColumn">
+    <div class="article">
+      <h2>TITLE HEADING</h2>
+      <h5>Title description, Dec 7, 2017</h5>
+      <div class="fakeImage" style="height:200px;">Image</div>
+      <p>Some text..</p>
+      <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+    </div>
+    <div class="article">
+      <h2>TITLE HEADING</h2>
+      <h5>Title description, Sep 2, 2017</h5>
+      <div class="fakeImage" style="height:200px;">Image</div>
+      <p>Some text..</p>
+      <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+    </div>
+  </div>
+  <div class="rightColumn">
+    <div class="article">
+      <h2>About Me</h2>
+      <div class="fakeImage" style="height:100px;">Image</div>
+      <p>Some text about me in culpa qui officia deserunt mollit anim..</p>
+    </div>
+    <div class="article">
+      <h3>Popular Post</h3>
+      <div class="fakeImage"><p>Image</p></div>
+      <div class="fakeImage"><p>Image</p></div>
+      <div class="fakeImage"><p>Image</p></div>
+    </div>
+    <div class="article">
+      <h3>Follow Me</h3>
+      <p>Some text..</p>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <h2>Footer</h2>
+</div>
+
+</body>
+</html>
