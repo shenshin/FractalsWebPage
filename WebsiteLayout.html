@@ -9,7 +9,8 @@
     --headerBGColor: #26344B; /* Primary 3 */
     --topNavigationBarTextColor: #CFD0E2; /* Secondary 1 1 */
     --topNavigationBarBGColor: #080927; /* Secondary 1 5 */
-    --topNavigationBarButtonsColor: #5C5D84; /* Secondary 1 2 */
+    --topNavigationBarButtonsBorderColor: #5C5D84; /* Secondary 1 2 */
+    --topNavigationBarButtonsColor: #3b3c55;
     --pageTextColor: #C6D6DB; /* Secondary 2 1 */
     --pageBGColor: #041C23; /* Secondary 2 5 */
     --articleBGColor: rgb(32, 32, 32);
@@ -25,10 +26,10 @@
 }
 
 body {
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     padding: 10px;
-    color: var(--pageTextColor);
     background-color: var(--pageBGColor);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: var(--pageTextColor);
 }
 
 .header {
@@ -38,58 +39,60 @@ body {
     background-color: var(--headerBGColor);
     border-bottom: 4px solid var(--pageBGColor);
 }
-
 .header h1 {
     font-size: 4em;
 }
 
 .topNavigationBar {
-    overflow: hidden;
-    color: var(--topNavigationBarTextColor);
     background-color: var(--topNavigationBarBGColor);
 }
-/* Buttons in the navigation bar */
-.topNavigationBar a {
-    float: left;
-    color: var(--topNavigationBarTextColor);
+/* Buttons in navigation bar */
+.topNavigationBar .button {
+    display: inline-block;
     background-color: var(--topNavigationBarButtonsColor);
+    border-top: 1px solid var(--topNavigationBarButtonsBorderColor);
+    border-bottom: 1px solid var(--topNavigationBarButtonsBorderColor);
+    color: var(--topNavigationBarTextColor);
+    padding: 5px 20px;
     text-align: center;
-    /* padding top&bottom right&left */
-    padding: 10px 16px;
-    /* Remove links underlining */
     text-decoration: none;
-    text-shadow: 1px 1px 0px var(--topNavigationBarBGColor);
-    border-left: 2px solid var(--pageBGColor);
-    border-right: 2px solid var(--pageBGColor);
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
 }
-
-/* Change colour on navigation bar buttons hover */
-.topNavigationBar a:hover {
+/* Change the buttons appearance on mouse over*/
+.topNavigationBar .button:hover {
     background-color: var(--topNavigationBarTextColor);
     color: var(--topNavigationBarBGColor);
-    text-shadow: none;
 }
+/* GitHub link on the right side of navigation bar */
 .topNavigationBar .gitHubLogo {
+    height: 27px;
+    width: 28.5px;
+    padding: 0px 1px 1px 1px;
+    margin-right: 15px;
+    border: 2px solid var(--topNavigationBarBGColor);
+    border-radius: 27px;
+    transition: all 0.1s ease-in-out;
     float: right;
-    padding: 2px 10px 0px 10px;
-    color:  var(--topNavigationBarTextColor);
     fill: var(--topNavigationBarTextColor);
 }
+/* Change the appearance of Github logo on mouse over */
 .topNavigationBar .gitHubLogo:hover {
-    fill: var(--topNavigationBarBGColor);
+    border-color: var(--topNavigationBarTextColor);
 }
-
+/* Page columns */
 .leftColumn {
     float: left;
     width: 75%;
     border-right: 1px dotted var(--pageTextColor);
+    padding-right: 5px;
 }
-
 .rightColumn {
     float: left;
     width: 25%;
     background-color: var(--rightColumnBGColor);
-    padding-left: 10px;
+    padding-left: 5px;
 }
 
 .fakeImage {
@@ -97,15 +100,16 @@ body {
     width: 100%;
     padding: 20px;
 }
-
+/* Individual article */
 .article {
     background-color: var(--articleBGColor);
     padding: 15px;
     margin-bottom: 10px;
 }
+/* Columns container */
 .pageContents {
     margin-top: 5px;
-    border-top: 1px solid var(--topNavigationBarButtonsColor);
+    border-top: 1px solid var(--topNavigationBarButtonsBorderColor);
 }
 /* Clears floats after the columns */
 .pageContents:after {
@@ -116,33 +120,47 @@ body {
 
 .footer {
     padding: 20px;
+    margin-top: 20px;
     text-align: center;
     color: var(--footerTextColor);
     background-color: var(--footerBGColor);
-    margin-top: 20px;
     border-top: 1px solid var(--footerBorderColor);
     border-bottom: 1px solid var(--footerBorderColor);
+}
+.footer a {
+    text-decoration: none;
+    color: var(--footerTextColor);
+    padding-right: 10px;
+}
+.footer a:hover {
+    text-decoration: underline;
 }
 
 /* Responsive layout - when the screen is less than 800px wide, 
 make the two columns stack on top of each other instead of next 
 to each other */
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 600px) {
     .leftColumn, .rightColumn {   
         width: 100%;
-        padding: 0;
+        padding: 0px;
+        border: none;
+    }
+    /* Move dotted line from the right side of left column to the bottom */
+    .leftColumn {
+        border-bottom: 1px dotted var(--pageTextColor);
     }
 }
 
 /* Responsive layout - when the screen is less than 400px wide, 
 make the navigation links stack on top of each other instead of 
 next to each other */
-@media screen and (max-width: 400px) {
+/* @media screen and (max-width: 400px) {
     .topNavigationBar a {
         float: none;
         width: 100%;
+        border: none;
     }
-}
+} */
 </style>
 </head>
 <body>
@@ -153,12 +171,18 @@ next to each other */
 </div>
 
 <div class="topNavigationBar">
-    <a href="#">Link</a>
-    <a href="#">Link</a>
-    <a href="#">Link</a>
-    <a class="gitHubLogo" href="https://github.com/shenshin">
+    <a href="#" class="button">
+        Serpinsky triangle
+    </a>
+    <a href="#" class="button">
+        Fern leaf
+    </a>
+    <a href="#" class="button">
+        Mandelbrot set
+    </a>
+    <a href="#" class="gitHubLogo">
         <!-- Scalable Vector Graphics GitHub cat logo-->
-        <svg height="32" width="32" viewBox="0 0 16 16" version="1.1" aria-hidden="true">
+        <svg width="23" height="23" viewBox="0 0 16 16" version="1.1" aria-hidden="true">
             <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
         </svg>
     </a>
@@ -201,7 +225,9 @@ next to each other */
 </div>
 
 <div class="footer">
-  <h2>Footer</h2>
+  <a href="#">Serpinsky triangle</a>
+  <a href="#">Mandelbrot set</a>
+  <a href="#">Fern leaf</a>
 </div>
 
 </body>
