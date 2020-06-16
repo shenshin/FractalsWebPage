@@ -154,13 +154,18 @@ to each other */
 /* Responsive layout - when the screen is less than 400px wide, 
 make the navigation links stack on top of each other instead of 
 next to each other */
-/* @media screen and (max-width: 400px) {
-    .topNavigationBar a {
-        float: none;
-        width: 100%;
-        border: none;
+@media screen and (max-width: 410px) {
+    .topNavigationBar .button {
+        display: inline-block;
+        width: 80%;
+        margin-top: 3px;
+        margin-bottom: 3px;
+        transition: all 0.1s;
     }
-} */
+    .topNavigationBar .gitHubLogo {
+        transition: all 0.1s ease-in-out;
+    }
+}
 </style>
 </head>
 <body>
@@ -225,9 +230,9 @@ next to each other */
 </div>
 
 <div class="footer">
-  <a href="#">Serpinsky triangle</a>
-  <a href="#">Mandelbrot set</a>
-  <a href="#">Fern leaf</a>
+  <a href="#">Serpinsky&nbsp;triangle</a>
+  <a href="#">Mandelbrot&nbsp;set</a>
+  <a href="#">Fern&nbsp;leaf</a>
 </div>
 
 </body>
