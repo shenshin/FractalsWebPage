@@ -5,6 +5,7 @@
 
 /* For all elements */
 * {
+    /* Collect all colors in one place */
     --headerTextColor: rgb(148, 154, 164);
     --headerBGColor: #26344B; /* Primary 3 */
     --topNavigationBarTextColor: #CFD0E2; /* Secondary 1 1 */
@@ -136,31 +137,28 @@ body {
     text-decoration: underline;
 }
 
-/* Responsive layout - when the screen is less than 800px wide, 
-make the two columns stack on top of each other instead of next 
-to each other */
+/* Change columns layout when screen gets smaller */
 @media screen and (max-width: 600px) {
     .leftColumn, .rightColumn {   
         width: 100%;
         padding: 0px;
         border: none;
     }
-    /* Move dotted line from the right side of left column to the bottom */
+    /* Move dotted line from the right side of left 
+        column to the bottom */
     .leftColumn {
         border-bottom: 1px dotted var(--pageTextColor);
     }
 }
 
-/* Responsive layout - when the screen is less than 400px wide, 
-make the navigation links stack on top of each other instead of 
-next to each other */
+/* Change the appearance of navigation bar
+    when screen gets narrow */
 @media screen and (max-width: 410px) {
     .topNavigationBar .button {
-        display: inline-block;
         width: 80%;
         margin-top: 3px;
         margin-bottom: 3px;
-        transition: all 0.1s;
+        transition: all 0.1s ease-in-out;
     }
     .topNavigationBar .gitHubLogo {
         transition: all 0.1s ease-in-out;
