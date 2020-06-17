@@ -2,48 +2,26 @@
 <html>
     <head>
         <style>
-            * {
-                box-sizing: border-box;
-                background-color: darkslateblue;
+            .box {
+                display: flex;
+                border: 2px dotted red;
+                height: 300px;
+                align-items: center;
+                justify-content: center;
             }
-            body {
-                padding: 0px;
+
+            .box div {
+                border: 2px solid blue;
+                border-radius: 4px;
+                width: 100px;
+                height: 100px;
             }
-            .header {
-                height: 80px;
-                /* padding: 10px 10px 10px 10px; */
-                background-color: brown;
-            }
-            .leftColumn {
-                float: left;
-                padding: 10px 10px 10px 10px;
-                background-color: green;
-                width: 70%;
-            }
-            .rightColumn {
-                float: left;
-                padding: 10px 10px 10px 10px;
-                background-color: blue;
-                width: 30%;
-            }
-            .footer {
-                height: 80px;
-                background-color: aquamarine;
-            }
+            
         </style>
     </head>
     <body>
-        <div class="header">
-
-        </div>
-        <div class="leftColumn">
-
-        </div>
-        <div class="rightColumn">
-
-        </div>
-        <div class="footer">
-
+        <div class="box">
+            <div></div>
         </div>
     </body>
 </html>
