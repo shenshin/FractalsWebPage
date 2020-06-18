@@ -130,7 +130,7 @@ a:hover {
 }
 /* Individual article */
 .article {
-    line-height: 150%;
+    line-height: 1.5em; /* 150% */
     background-color: var(--articleBGColor);
     padding: 15px;
     margin-bottom: 10px;
@@ -166,6 +166,27 @@ a:hover {
     text-decoration: underline;
 }
 
+pre {
+    background-color: #131314;
+    padding: 15px 20px;
+    height: 200px;
+    overflow-y: auto;
+}
+.kw { /* Java keywords */
+    color: #c7652f;
+}
+.me { /* Methods */
+    color: #ecb700;
+}
+.pr { /* properties */
+    color: #fd8eff;
+}
+.co { /* Comments */
+    color: #269dba;
+}
+.nu {
+    color: #00d0ff;
+}
 /* Change columns layout when screen gets smaller */
 @media screen and (max-width: 600px) {
     .leftColumn, .rightColumn {   
@@ -184,7 +205,6 @@ a:hover {
     when screen gets narrow */
 @media screen and (max-width: 410px) {
     .topNavigationBar {
-        height: auto;
         /* change menu buttons alignment in compact mode 
         to stretch instead of center */
         flex-direction: column;
@@ -206,26 +226,27 @@ a:hover {
         flex-direction: column;
     }
     .footer a {
-        padding-bottom: 5px;
+        margin-bottom: 5px;
     }
 }
 </style>
+    <title></title>
 </head>
 <body>
 
 <div class="header">
-  <h1>Famous Fractals</h1>
-  <p>Fractals are men's best toys.</p>
+    <h1>Famous Fractals</h1>
+    <p>Fractals are men's best toys.</p>
 </div>
 
 <div class="topNavigationBar">
-    <a href="#title1" title="Sierpinski triangle" class="button">
+    <a href="#title1" title="Sierpinski" class="button">
         Sierpinski triangle
     </a>
-    <a href="#title2" title="Barnsley fern" class="button">
+    <a href="#title2" title="Barnsley" class="button">
         Barnsley fern
     </a>
-    <a href="#title3" title="Mandelbrot set" class="button">
+    <a href="#title3" title="Mandelbrot" class="button">
         Mandelbrot set
     </a>
     <a href="https://github.com/shenshin/FractalsWebPage" title="See this page on GitHub" class="rightMenuItem">
@@ -237,59 +258,105 @@ a:hover {
 </div>
 
 <div class="pageContents">
-  <div class="leftColumn">
-    <div class="article">
-        <h2 id="top">Welcome to my Fractals page</h2>
-        <h5>June 18, 2020</h5>
-        <p>Hi everyone! I am Alexader Shenshin and I'm a fan 
-            of programming languages and computer science. 
-            On this webpage you can see some of the Java programs for 
-            drawing fractals. These programs were inspired by 
-            <a href="https://www.cs.princeton.edu/~rs/">Robert Sedgewick's</a> 
-            Princeton course <a href="https://introcs.cs.princeton.edu/java/home/">
-            Computer Science. An Interdisciplinary Approach</a>.
-        </p>
-        <p></p>
+    <div class="leftColumn">
+        <div class="article">
+            <h2 id="top">Welcome to my Fractals page</h2>
+            <h5>June 18, 2020</h5>
+            <p>Hi everyone! I am Alexader Shenshin and I'm a fan 
+                of programming languages and computer science. 
+                On this webpage you can see some of the Java programs for 
+                drawing fractals. These programs were inspired by 
+                <a href="https://www.cs.princeton.edu/~rs/">Robert Sedgewick's</a> 
+                Princeton course <a href="https://introcs.cs.princeton.edu/java/home/">
+                Computer Science. An Interdisciplinary Approach</a>.
+            </p>
+            <p></p>
+        </div>
+        <div class="article">
+            <h2 id="title1">Serpinsky triangle</h2>
+            <h5>June 18, 2020</h5>
+            <div class="fakeImage" style="height:200px;">Image</div>
+            <p>Some text..</p>
+            <div class="code">
+            <pre>
+<span class="kw">public static void</span> <span class="me"> drawFractals</span>(<span class="kw">int</span> trials){
+    <span class="co">// probability distribution for choosing each rule</span>
+    <span class="kw">double</span>[] dist = StdArrayIO.readDouble1D();
+
+    <span class="co">// update matrices</span>
+    <span class="kw">double</span>[][] cx = StdArrayIO.readDouble2D();
+    <span class="kw">double</span>[][] cy = StdArrayIO.readDouble2D();
+
+    <span class="co">// current value of (x, y)</span>
+    <span class="kw">double</span> x = 0.0;
+    <span class="kw">double</span> y = 0.0;
+    Color[] colors = {
+        Color.RED, Color.GREEN, Color.BLUE,
+        Color.ORANGE, Color.MAGENTA, Color.CYAN, Color.YELLOW
+    };
+    <span class="co">// do trials iterations of the chaos game</span>
+    StdDraw.enableDoubleBuffering();
+    <span class="kw">for</span> (<span class="kw">int</span> t = 0; t < trials; t++) {
+        <span class="co">// pick a random rule according
+        to the probability distribution</span>
+        <span class="kw">int</span> r = StdRandom.discrete(dist);
+        StdDraw.setPenColor(colors[r]);
+        <span class="co">// do the update</span>
+        <span class="kw">double</span> x0 = cx[r][0] * x + cx[r][1] * y + cx[r][2];
+        <span class="kw">double</span> y0 = cy[r][0] * x + cy[r][1] * y + cy[r][2];
+
+        x = x0;
+        y = y0;
+
+        <span class="co">// draw the resulting point</span>
+        StdDraw.point(x, y);
+
+        <span class="co">// for efficiency, display only every 100 iterations</span>
+        <span class="kw">if</span> (t % 100 == 0) {
+             StdDraw.show();
+             StdDraw.pause(10);
+        }
+    }
+
+    <span class="co">// ensure everything gets drawn</span>
+    StdDraw.show();
+}
+            </pre>
+            </div>
+            <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+        </div>
+        <div class="article">
+            <h2 id="title2">Barnsley fern</h2>
+            <h5>June 18, 2020</h5>
+            <div class="fakeImage" style="height:200px;">Image</div>
+            <p>Some text..</p>
+            <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+        </div>
+        <div class="article">
+            <h2 id="title3">Mandelbrot set</h2>
+            <h5>June 18, 2020</h5>
+            <div class="fakeImage" style="height:200px;">Image</div>
+            <p>Some text..</p>
+            <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+        </div>
     </div>
-    <div class="article">
-        <h2 id="title1">Serpinsky triangle</h2>
-        <h5>June 18, 2020</h5>
-        <div class="fakeImage" style="height:200px;">Image</div>
-        <p>Some text..</p>
-        <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
-    </div>
-    <div class="article">
-        <h2 id="title2">Barnsley fern</h2>
-        <h5>June 18, 2020</h5>
-        <div class="fakeImage" style="height:200px;">Image</div>
-        <p>Some text..</p>
-        <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
-    </div>
-    <div class="article">
-        <h2 id="title3">Mandelbrot set</h2>
-        <h5>June 18, 2020</h5>
-        <div class="fakeImage" style="height:200px;">Image</div>
-        <p>Some text..</p>
-        <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
-      </div>
-  </div>
   <div class="rightColumn">
-    <div class="article">
-      <h2>About Me</h2>
-      <div class="fakeImage" style="height:100px;">Image</div>
-      <p>Some text about me in culpa qui officia deserunt mollit anim..</p>
+        <div class="article">
+            <h2>About Me</h2>
+            <div class="fakeImage" style="height:100px;">Image</div>
+            <p>Some text about me in culpa qui officia deserunt mollit anim..</p>
+        </div>
+        <div class="article">
+            <h3>Popular Post</h3>
+            <div class="fakeImage"><p>Image</p></div>
+            <div class="fakeImage"><p>Image</p></div>
+            <div class="fakeImage"><p>Image</p></div>
+        </div>
+        <div class="article">
+            <h3>Follow Me</h3>
+            <p>Some text..</p>
+        </div>
     </div>
-    <div class="article">
-      <h3>Popular Post</h3>
-      <div class="fakeImage"><p>Image</p></div>
-      <div class="fakeImage"><p>Image</p></div>
-      <div class="fakeImage"><p>Image</p></div>
-    </div>
-    <div class="article">
-      <h3>Follow Me</h3>
-      <p>Some text..</p>
-    </div>
-  </div>
 </div>
 
 <div class="footer">
