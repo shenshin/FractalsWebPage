@@ -115,14 +115,14 @@ a:hover {
 }
 /* Page columns */
 .mainColumn {
-    width: 75%;
     border-left: 1px dotted var(--pageTextColor);
     padding-left: 7px;
 }
 .menuColumn {
-    width: 25%;
+    width: max-content;
     margin-right: 7px;
     margin-bottom: 10px;
+    padding: 10px;
     background-color: var(--topNavigationBarBGColor);
 }
 .menuColumn .article {
@@ -209,7 +209,7 @@ pre {
     font-weight: bold;
 }
 /* Change columns layout when screen gets smaller */
-@media screen and (max-width:700px) {
+@media screen and (max-width:800px) {
     .pageContents {
         flex-direction: column;
     }
