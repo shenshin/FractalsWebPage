@@ -119,25 +119,29 @@ a:hover {
     border-left: 1px dotted var(--pageTextColor);
     padding-left: 7px;
 }
-.extraColumn {
+.menuColumn {
     width: 25%;
-    padding-right: 7px;
-    padding-bottom: 10px;
-}
-.extraColumn .article {
-    color: var(--topNavigationBarTextColor);
+    margin-right: 7px;
+    margin-bottom: 10px;
     background-color: var(--topNavigationBarBGColor);
+}
+.menuColumn .article {
+    /* Centers left menu horizontally in container div */
+    width: max-content;
+    margin: auto;
+    background-color: unset;
+    color: var(--topNavigationBarTextColor);
     line-height: 2em;
     height: 100%;
 }
-.extraColumn .article a {
+.menuColumn .article a {
     color: var(--topNavigationBarTextColor);
     text-decoration: none;
 }
-.extraColumn .article a:hover {
+.menuColumn .article a:hover {
     text-decoration: underline;
 }
-.extraColumn ul {
+.menuColumn ul {
     color: var(--topNavigationBarTextColor);
     list-style-type: square;
     padding: 0;
@@ -209,7 +213,7 @@ pre {
     .pageContents {
         flex-direction: column;
     }
-    .mainColumn, .extraColumn {
+    .mainColumn, .menuColumn {
         width: 100%;
         padding: 0;
         border: none;
@@ -280,7 +284,7 @@ pre {
 </div>
 
 <div class="pageContents">
-    <div class="extraColumn">
+    <div class="menuColumn">
         <div class="article">
             <h3>Fractals</h3>
             <ul>
