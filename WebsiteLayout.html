@@ -23,11 +23,12 @@
     --fakeImgBGColor: black;
 
     /* Include padding and border in the element's total width and height */
-    box-sizing: border-box;
+    /*box-sizing: border-box;*/
 }
 
 body {
-    padding: 10px;
+    padding: 0 10px 10px 10px;
+    margin: 0;
     background-color: var(--pageBGColor);
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     color: var(--pageTextColor);
@@ -87,7 +88,7 @@ a:hover {
 .rightMenuItem {
     width: 30px;
     height: 30px;
-    margin-right: 10px;
+    margin-right: 15px;
     /* Change default Y alignment in flexbox */
     align-self: center; 
     /* Change default X alignment in flexbox to right */
@@ -122,7 +123,6 @@ a:hover {
     width: max-content;
     margin-right: 7px;
     margin-bottom: 10px;
-    padding: 10px;
     background-color: var(--topNavigationBarBGColor);
 }
 .menuColumn .article {
@@ -149,7 +149,6 @@ a:hover {
 }
 .fakeImage {
     background-color: var(--fakeImgBGColor);
-    width: 100%;
     padding: 20px;
 }
 /* Individual article */
@@ -183,7 +182,7 @@ a:hover {
     text-decoration: underline;
 }
 /* Preformated text for displaying Java code */
-pre {
+.article pre {
     background-color: #131314;
     padding: 15px 20px;
     height: 200px;
@@ -213,10 +212,19 @@ pre {
     .pageContents {
         flex-direction: column;
     }
-    .mainColumn, .menuColumn {
+    .menuColumn {
         width: 100%;
         padding: 0;
-        border: none;
+        margin-bottom: 7px;
+    }
+    .menuColumn .article {
+        margin: 0;
+    }
+    .mainColumn {
+        width: 100%;
+        border-left: unset;
+        padding: 7px 0 0;
+        border-top: 1px dotted var(--pageTextColor);
     }
     /* Move dotted line from the right side of left 
         column to the bottom */
@@ -227,7 +235,7 @@ pre {
 
 /* Change the appearance of navigation bar
     when screen gets narrow */
-@media screen and (max-width: 410px) {
+@media screen and (max-width: 450px) {
     .topNavigationBar {
         /* change menu buttons alignment in compact mode 
         to stretch instead of center */
@@ -277,7 +285,7 @@ pre {
     </a>
     <a href="https://github.com/shenshin/FractalsWebPage" title="See this page on GitHub" class="rightMenuItem">
         <!-- Scalable Vector Graphics GitHub cat logo-->
-        <svg width="30" height="30" viewBox="0 0 16 16" version="1.1" aria-hidden="true">
+        <svg width="27" height="27" viewBox="0 0 16 16" aria-hidden="true">
             <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
         </svg>
     </a>
@@ -315,7 +323,6 @@ pre {
             <h5>June 18, 2020</h5>
             <div class="fakeImage" style="height:200px;">Image</div>
             <p>Some text..</p>
-            <div class="code">
             <pre>
 <span class="kw">public static void</span> <span class="me"> drawFractals</span>(<span class="kw">int</span> trials){
     <span class="co">// probability distribution for choosing each rule</span>
@@ -360,7 +367,6 @@ pre {
     StdDraw.show();
 }
             </pre>
-            </div>
             <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
         </div>
         <div class="article">
