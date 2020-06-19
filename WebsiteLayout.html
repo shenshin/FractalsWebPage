@@ -111,7 +111,7 @@ a:hover {
     margin-top: 5px;
     border-top: 1px solid var(--topNavigationBarButtonsBorderColor);
     display: flex;
-    align-items: flex-start;
+    align-items: stretch;
 }
 /* Page columns */
 .mainColumn {
@@ -122,14 +122,16 @@ a:hover {
 .extraColumn {
     width: 25%;
     padding-right: 7px;
+    padding-bottom: 10px;
 }
 .extraColumn .article {
     color: var(--topNavigationBarTextColor);
     background-color: var(--topNavigationBarBGColor);
     line-height: 2em;
+    height: 100%;
 }
 .extraColumn .article a {
-    color: *var(--topNavigationBarTextColor);
+    color: var(--topNavigationBarTextColor);
     text-decoration: none;
 }
 .extraColumn .article a:hover {
