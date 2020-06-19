@@ -83,17 +83,19 @@ a:hover {
     background-color: var(--topNavigationBarTextColor);
     color: var(--topNavigationBarBGColor);
 }
+/* Small GitHub logo on the right side of the menu bar */
 .rightMenuItem {
     width: 30px;
     height: 30px;
     margin-right: 10px;
     /* Change default Y alignment in flexbox */
     align-self: center; 
-    /* Change default X alignment to right */
+    /* Change default X alignment in flexbox to right */
     margin-left: auto;
 }
+/* Scalable Vector Graphics GitHub icon */
 .rightMenuItem svg {
-    padding: 0.5px;
+    padding: 1px;
     border-radius: 30px;
     border: 1px solid var(--topNavigationBarBGColor);
     fill: var(--topNavigationBarTextColor);
@@ -108,21 +110,37 @@ a:hover {
 .pageContents {
     margin-top: 5px;
     border-top: 1px solid var(--topNavigationBarButtonsBorderColor);
+    display: flex;
+    align-items: flex-start;
 }
 /* Page columns */
-.leftColumn {
-    float: left;
+.mainColumn {
     width: 75%;
-    border-right: 1px dotted var(--pageTextColor);
-    padding-right: 5px;
+    border-left: 1px dotted var(--pageTextColor);
+    padding-left: 7px;
 }
-.rightColumn {
-    float: left;
+.extraColumn {
     width: 25%;
-    background-color: var(--rightColumnBGColor);
-    padding-left: 5px;
+    padding-right: 7px;
 }
-
+.extraColumn .article {
+    color: var(--topNavigationBarTextColor);
+    background-color: var(--topNavigationBarBGColor);
+    line-height: 2em;
+}
+.extraColumn .article a {
+    color: *var(--topNavigationBarTextColor);
+    text-decoration: none;
+}
+.extraColumn .article a:hover {
+    text-decoration: underline;
+}
+.extraColumn ul {
+    color: var(--topNavigationBarTextColor);
+    list-style-type: square;
+    padding: 0;
+    margin-left: 2em;
+}
 .fakeImage {
     background-color: var(--fakeImgBGColor);
     width: 100%;
@@ -136,20 +154,13 @@ a:hover {
     margin-bottom: 10px;
 }
 
-/* Clears floats after the columns */
-.pageContents:after {
-    content: "";
-    display: table;
-    clear: both;
-}
-
 .footer {
     display: flex;
     flex-direction: row; /* Allign items in a row */
     justify-content: center; /* Main (x) axis justify left*/
     align-items: center; /* Cross (y) axis justify */
     padding: 20px;
-    margin-top: 20px;
+    margin-top: 5px;
     color: var(--footerTextColor);
     background-color: var(--footerBGColor);
     border-top: 1px solid var(--footerBorderColor);
@@ -165,7 +176,7 @@ a:hover {
 .footer a:hover {
     text-decoration: underline;
 }
-
+/* Preformated text for displaying Java code */
 pre {
     background-color: #131314;
     padding: 15px 20px;
@@ -187,18 +198,25 @@ pre {
 .nu {
     color: #00d0ff;
 }
+#notaBene {
+    color: var(--topNavigationBarTextColor);
+    font-weight: bold;
+}
 /* Change columns layout when screen gets smaller */
-@media screen and (max-width: 600px) {
-    .leftColumn, .rightColumn {   
+@media screen and (max-width:700px) {
+    .pageContents {
+        flex-direction: column;
+    }
+    .mainColumn, .extraColumn {
         width: 100%;
-        padding: 0px;
+        padding: 0;
         border: none;
     }
     /* Move dotted line from the right side of left 
         column to the bottom */
-    .leftColumn {
-        border-bottom: 1px dotted var(--pageTextColor);
-    }
+    /*.mainColumn {*/
+    /*    border-bottom: 1px dotted var(--pageTextColor);*/
+    /*}*/
 }
 
 /* Change the appearance of navigation bar
@@ -215,12 +233,11 @@ pre {
         margin-bottom: 3px;
         transition: all 0.1s ease-in-out;
     }
+    .pageContents {
+        flex-direction: column;
+    }
     .rightMenuItem {
-        /* unset right allignment */
-        margin-left: unset;
-        margin-right: unset;
-        margin-top: 3px;
-        margin-bottom: 2px;
+        margin: 3px 0 2px;
     }
     .footer {
         flex-direction: column;
@@ -249,6 +266,9 @@ pre {
     <a href="#title3" title="Mandelbrot" class="button">
         Mandelbrot set
     </a>
+    <a href="#title4" title="Julia" class="button">
+        Julia set
+    </a>
     <a href="https://github.com/shenshin/FractalsWebPage" title="See this page on GitHub" class="rightMenuItem">
         <!-- Scalable Vector Graphics GitHub cat logo-->
         <svg width="30" height="30" viewBox="0 0 16 16" version="1.1" aria-hidden="true">
@@ -258,19 +278,31 @@ pre {
 </div>
 
 <div class="pageContents">
-    <div class="leftColumn">
+    <div class="extraColumn">
+        <div class="article">
+            <h3>Fractals</h3>
+            <ul>
+                <li><a href="#title1">Sierpinski triangle</a></li>
+                <li><a href="#title2">Barnsley fern</a></li>
+                <li><a href="#title3">Mandelbrot set</a></li>
+                <li><a href="#title4">Julia set</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="mainColumn">
         <div class="article">
             <h2 id="top">Welcome to my Fractals page</h2>
             <h5>June 18, 2020</h5>
-            <p>Hi everyone! I am Alexader Shenshin and I'm a fan 
-                of programming languages and computer science. 
-                On this webpage you can see some of the Java programs for 
-                drawing fractals. These programs were inspired by 
-                <a href="https://www.cs.princeton.edu/~rs/">Robert Sedgewick's</a> 
+            <p>Hi everyone! I am Alexander Shenshin and I'm a fan
+                of programming languages and computer science.
+                On this web page you can see some of the Java programs for
+                drawing fractals. These programs were inspired by
+                <a href="https://www.cs.princeton.edu/~rs/">Robert Sedgewick's</a>
                 Princeton course <a href="https://introcs.cs.princeton.edu/java/home/">
                 Computer Science. An Interdisciplinary Approach</a>.
             </p>
-            <p></p>
+            <p id="notaBene">N.B. This is a flexible page. Try to resize it. When the screen width
+            gets less then 700 and 410 pixels, page blocks are being reordered.</p>
         </div>
         <div class="article">
             <h2 id="title1">Serpinsky triangle</h2>
@@ -328,33 +360,23 @@ pre {
         <div class="article">
             <h2 id="title2">Barnsley fern</h2>
             <h5>June 18, 2020</h5>
-            <div class="fakeImage" style="height:200px;">Image</div>
+            <div class="fakeImage" style="height:200px;">Barnsley fern</div>
             <p>Some text..</p>
             <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
         </div>
         <div class="article">
             <h2 id="title3">Mandelbrot set</h2>
             <h5>June 18, 2020</h5>
-            <div class="fakeImage" style="height:200px;">Image</div>
+            <div class="fakeImage" style="height:200px;">Mandelbrot set</div>
             <p>Some text..</p>
             <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
         </div>
-    </div>
-  <div class="rightColumn">
         <div class="article">
-            <h2>About Me</h2>
-            <div class="fakeImage" style="height:100px;">Image</div>
-            <p>Some text about me in culpa qui officia deserunt mollit anim..</p>
-        </div>
-        <div class="article">
-            <h3>Popular Post</h3>
-            <div class="fakeImage"><p>Image</p></div>
-            <div class="fakeImage"><p>Image</p></div>
-            <div class="fakeImage"><p>Image</p></div>
-        </div>
-        <div class="article">
-            <h3>Follow Me</h3>
+            <h2 id="title4">Julia set</h2>
+            <h5>June 18, 2020</h5>
+            <div class="fakeImage" style="height:200px;">Julia set</div>
             <p>Some text..</p>
+            <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
         </div>
     </div>
 </div>
@@ -363,6 +385,7 @@ pre {
   <a href="#title1" title="Sierpinski">Sierpinski&nbsp;triangle</a>
   <a href="#title2" title="Barnsley">Barnsley&nbsp;fern</a>
   <a href="#title3" title="Mandelbrot">Mandelbrot&nbsp;set</a>
+    <a href="#title4" title="Julia">Julia&nbsp;set</a>
 </div>
 
 </body>
