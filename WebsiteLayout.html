@@ -15,6 +15,7 @@
     --pageTextColor: #C6D6DB; /* Secondary 2 1 */
     --pageBGColor: #041C23; /* Secondary 2 5 */
     --articleBGColor: rgb(32, 32, 32);
+    --codeBGColor: rgb(20, 20, 20);
     --articleBorderColor: rgba(85,101,124,1);
     --rightColumnTextColor: rgb(207, 208, 226);
     --rightColumnBGColor: var(--pageBGColor); /* Secondary 2 5 */
@@ -114,10 +115,11 @@ a:hover {
     margin-top: 5px;
     border-top: 1px solid var(--topNavigationBarButtonsBorderColor);
     display: flex;
+    /* Equals columns height */
     align-items: stretch;
 }
 /* Page columns */
-.mainColumn {
+.contentsColumn {
     border-left: 1px dotted var(--pageTextColor);
     padding-left: 7px;
 }
@@ -155,12 +157,48 @@ a:hover {
     background-color: var(--articleBGColor);
     padding: 15px;
     margin-bottom: 10px;
+    /* Don't let floating images hang outside of containing article */
+    overflow-y: hidden;
 }
-.article img {
+/* Left and right aligned images */
+.imageLeft, .imageRight {
     width: 40%;
+    border: 1px solid var(--articleBorderColor);
+}
+.imageLeft {
     float: left;
     margin: 0 15px 15px 0;
-    border: 1px solid var(--articleBorderColor);
+}
+.imageRight {
+    float: right;
+    margin: 0 0 15px 15px;
+}
+/* Pre-formatted text for displaying Java code */
+.article pre {
+    background-color: #131314;
+    padding: 15px 20px;
+    height: 200px;
+    overflow-y: auto;
+    border: 1px solid var(--codeBGColor);
+    border-left: 5px solid var(--articleBorderColor);
+    clear: both; /*  Clear all floats  */
+}
+/* Code syntax highlighting */
+.kw { /* Java keywords */
+    color: #c7652f;
+}
+.me { /* Methods */
+    color: #ecb700;
+}
+.pr { /* Properties */
+    color: #fd8eff;
+}
+.co { /* Comments */
+    color: #269dba;
+}
+.nu { /* Numbers */
+    color: #00d0ff;
+    font-weight: bold;
 }
 .footer {
     display: flex;
@@ -184,33 +222,16 @@ a:hover {
 .footer a:hover {
     text-decoration: underline;
 }
-/* Pre-formatted text for displaying Java code */
-.article pre {
-    background-color: #131314;
-    padding: 15px 20px;
-    height: 200px;
-    overflow-y: auto;
-    border-left: 5px solid var(--articleBorderColor);
-}
-.kw { /* Java keywords */
-    color: #c7652f;
-}
-.me { /* Methods */
-    color: #ecb700;
-}
-.pr { /* properties */
-    color: #fd8eff;
-}
-.co { /* Comments */
-    color: #269dba;
-}
-.nu { /* Numbers */
-    color: #00d0ff;
-}
 #notaBene {
     color: rgba(242,206,255,1);
     /*font-weight: bold;*/
 }
+.equation {
+    line-height: 50%;
+    font-family: cursive;
+    letter-spacing: 0.01em;
+}
+
 /* Change columns layout when screen gets smaller */
 @media screen and (max-width:800px) {
     .pageContents {
@@ -224,15 +245,20 @@ a:hover {
     .menuColumn .article {
         margin: 0;
     }
-    .mainColumn {
+    .contentsColumn {
         width: 100%;
         border-left: unset;
         padding: 7px 0 0;
         border-top: 1px dotted var(--pageTextColor);
     }
-    .article img {
+    .imageLeft, .imageRight {
         width: 50%;
+    }
+    .imageLeft {
         margin: 0 10px 10px 0;
+    }
+    .imageRight {
+        margin: 0 0 10px 10px;
     }
 }
 
@@ -256,7 +282,7 @@ a:hover {
     .rightMenuItem {
         margin: 3px 0 2px;
     }
-    .article img {
+    .imageLeft, .imageRight {
         width: 100%;
         float: none;
         margin: 0 0 10px 0;
@@ -311,7 +337,7 @@ a:hover {
             </ul>
         </div>
     </div>
-    <div class="mainColumn">
+    <div class="contentsColumn">
         <div class="article">
             <h2 id="top">Welcome to my Fractals page</h2>
             <h5>June 18, 2020</h5>
@@ -329,19 +355,29 @@ a:hover {
         <div class="article">
             <h2 id="title1">Serpinsky triangle</h2>
             <h5>June 18, 2020</h5>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Sierpinski_tetrahedron_by_George_W._Hart.jpg/1200px-Sierpinski_tetrahedron_by_George_W._Hart.jpg" alt="Sierpinski triangle 3D">
-            <p>The Sierpiński triangle (sometimes spelled Sierpinski), also
-                called the Sierpiński gasket or Sierpiński sieve, is a fractal
+            <p><img class="imageLeft" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Sierpinski_tetrahedron_by_George_W._Hart.jpg/1200px-Sierpinski_tetrahedron_by_George_W._Hart.jpg" alt="Sierpinski triangle 3D">
+                The Sierpi&nacute;ski triangle (sometimes spelled Sierpinski), also
+                called the Sierpi&nacute;ski gasket or Sierpi&nacute;ski sieve, is a fractal
                 attractive fixed set with the overall shape of an equilateral
                 triangle, subdivided recursively into smaller equilateral
                 triangles. Originally constructed as a curve, this is one
-                of the basic examples of self-similar sets—that is,
+                of the basic examples of self-similar sets &mdash; that is,
                 it is a mathematically generated pattern that is reproducible
                 at any magnification or reduction. It is named after the Polish
-                mathematician Wacław Sierpiński, but appeared as a decorative
-                pattern many centuries before the work of Sierpiński.</p>
+                mathematician Wac&lstrok;aw Sierpi&nacute;ski, but appeared as a decorative
+                pattern many centuries before the work of Sierpi&nacute;ski
+                <a href="https://en.wikipedia.org/wiki/Sierpi%C5%84ski_triangle"><sup>[WikipediA]</sup></a>
+            </p>
+            <h2 style="clear: both">Construction. Chaos Game</h2>
+            <ol><li>Take three points in a plane to form a triangle, you need not draw it.</li>
+                <li>Randomly select any point inside the triangle and consider that your current position.</li>
+                <li>Randomly select any one of the three vertex points.</li>
+                <li>Move half the distance from your current position to the selected vertex.</li>
+                <li>Plot the current position.</li>
+                <li>Repeat from step 3.</li></ol>
             <pre>
-<span class="kw">public static void</span> <span class="me"> drawFractals</span>(<span class="kw">int</span> trials){
+<span class="co">// Usage: drawSierpinski(1000);</span>
+<span class="kw">public static void</span> <span class="me"> drawSierpinski</span>(<span class="kw">int</span> trials){
     <span class="co">// probability distribution for choosing each rule</span>
     <span class="kw">double</span>[] dist = StdArrayIO.readDouble1D()<span class="kw">;</span>
 
@@ -350,22 +386,22 @@ a:hover {
     <span class="kw">double</span>[][] cy = StdArrayIO.readDouble2D()<span class="kw">;</span>
 
     <span class="co">// current value of (x, y)</span>
-    <span class="kw">double</span> x = 0.0<span class="kw">;</span>
-    <span class="kw">double</span> y = 0.0<span class="kw">;</span>
+    <span class="kw">double</span> x = <span class="nu">0.0</span><span class="kw">;</span>
+    <span class="kw">double</span> y = <span class="nu">0.0</span><span class="kw">;</span>
     Color[] colors = {
         Color.<span class="pr">RED</span>, Color.<span class="pr">GREEN</span>, Color.<span class="pr">BLUE</span>,
         Color.<span class="pr">ORANGE</span>, Color.<span class="pr">MAGENTA</span>, Color.<span class="pr">CYAN</span>, Color.<span class="pr">YELLOW</span>
     }<span class="kw">;</span>
     <span class="co">// do trials iterations of the chaos game</span>
     StdDraw.enableDoubleBuffering()<span class="kw">;</span>
-    <span class="kw">for</span> (<span class="kw">int</span> t = 0; t < trials; t++) {
+    <span class="kw">for</span> (<span class="kw">int</span> t = <span class="nu">0</span>; t < trials; t++) {
         <span class="co">// pick a random rule according
         to the probability distribution</span>
         <span class="kw">int</span> r = StdRandom.discrete(dist)<span class="kw">;</span>
         StdDraw.setPenColor(colors[r])<span class="kw">;</span>
         <span class="co">// do the update</span>
-        <span class="kw">double</span> x0 = cx[r][0] * x + cx[r][1] * y + cx[r][2]<span class="kw">;</span>
-        <span class="kw">double</span> y0 = cy[r][0] * x + cy[r][1] * y + cy[r][2]<span class="kw">;</span>
+        <span class="kw">double</span> x0 = cx[r][<span class="nu">0</span>] * x + cx[r][<span class="nu">1</span>] * y + cx[r][<span class="nu">2</span>]<span class="kw">;</span>
+        <span class="kw">double</span> y0 = cy[r][<span class="nu">0</span>] * x + cy[r][<span class="nu">1</span>] * y + cy[r][<span class="nu">2</span>]<span class="kw">;</span>
 
         x = x0<span class="kw">;</span>
         y = y0<span class="kw">;</span>
@@ -374,9 +410,9 @@ a:hover {
         StdDraw.point(x, y)<span class="kw">;</span>
 
         <span class="co">// for efficiency, display only every 100 iterations</span>
-        <span class="kw">if</span> (t % 100 == 0) {
+        <span class="kw">if</span> (t % <span class="nu">100</span> == <span class="nu">0</span>) {
              StdDraw.show()<span class="kw">;</span>
-             StdDraw.pause(10)<span class="kw">;</span>
+             StdDraw.pause(<span class="nu">10</span>)<span class="kw">;</span>
         }
     }
 
@@ -388,35 +424,157 @@ a:hover {
         <div class="article">
             <h2 id="title2">Barnsley fern</h2>
             <h5>June 18, 2020</h5>
-            <div class="fakeImage" style="height:200px;">Barnsley fern</div>
-            <p>Some text..</p>
-            <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+
+            <p><img class="imageLeft" src="https://live.staticflickr.com/3543/3373234918_fe89f5a88d.jpg" alt="Asplenium adiantum-nigrum">
+                The Barnsley fern is a fractal named after the British mathematician
+                Michael Barnsley who first described it in his book Fractals Everywhere.
+                He made it to resemble the black spleenwort, Asplenium adiantum-nigrum.
+            </p>
+            <p>
+                The fern is one of the basic examples of self-similar sets, i.e. it is
+                a mathematically generated pattern that can be reproducible at any
+                magnification or reduction. Like the Sierpinski triangle, the Barnsley
+                fern shows how graphically beautiful structures can be built from
+                repetitive uses of mathematical formulas with computers. Barnsley's
+                1988 book Fractals Everywhere is based on the course which he taught
+                for undergraduate and graduate students in the School of Mathematics,
+                Georgia Institute of Technology, called Fractal Geometry. After
+                publishing the book, a second course was developed, called Fractal
+                Measure Theory. Barnsley's work has been a source of inspiration to
+                graphic artists attempting to imitate nature with mathematical models.
+            </p>
+            <p>
+                The fern code developed by Barnsley is an example of an iterated function
+                system (IFS) to create a fractal. This follows from the collage theorem.
+                He has used fractals to model a diverse range of phenomena in science
+                and technology, but most specifically plant structures.
+            </p>
+            <h2 style="clear: both">Construction</h2>
+            <p><img class="imageRight" src="https://i.ytimg.com/vi/iGMGVpLMtMs/maxresdefault.jpg" alt="Fern">
+                The first point drawn is at the origin (<i>x</i><sub>0</sub> = 0, <i>y</i><sub>0</sub> = 0)
+                and then the new points are iteratively computed by randomly applying one of the
+                following four coordinate transformations:
+            </p>
+            <p class="equation">&fnof;<sub>1</sub></p>
+            <dl class="equation"><dd>x<sub>n + 1</sub> = 0</dd></dl>
+            <dl class="equation"><dd>y<sub>n + 1</sub> = 0.16 y<sub>n</sub></dd></dl>
+            <p>This coordinate transformation is chosen 1% of the time and just maps any point to
+                a point in the first line segment at the base of the stem. This part of the figure
+                is the first to be completed during the course of iterations.
+            </p>
+            <p class="equation"><br>
+                <i>&fnof;</i><sub>2</sub>
+            </p>
+            <dl class="equation"><dd>x<sub>>n &plus; 1</sub> = 0.85 x<sub>n</sub> &plus; 0.04 y<sub>n</sub></dd></dl>
+            <dl class="equation"><dd>y<sub>n &plus; 1</sub> = &minus;0.04 x<sub>n</sub> &plus; 0.85 y<sub>n</sub> &plus; 1.6</dd></dl>
+            <p>This coordinate transformation is chosen 85% of the time and maps any point inside
+                the leaflet represented by the red triangle to a point inside the opposite,
+                smaller leaflet represented by the blue triangle in the figure.
+            </p>
+            <p class="equation"><i>&fnof;</i><sub>3</sub></p>
+            <dl class="equation"><dd>x<sub>n &plus; 1</sub> = 0.2 x<sub>n></sub>&nbsp;&minus;&nbsp;0.26&nbsp;y<sub>n</sub></dd></dl>
+            <dl class="equation"><dd>y<sub>n &plus; 1</sub> = 0.23 x<sub>n</sub>&nbsp;&plus;&nbsp;0.22 y<sub>n</sub>&nbsp;&plus;&nbsp;1.6</dd></dl>
+            <p>This coordinate transformation is chosen 7% of the time and maps any point inside the
+                leaflet (or <em>pinna</em>) represented by the blue triangle to a point inside
+                the alternating corresponding triangle across the stem (it flips it).
+            </p>
+            <p class="equation">&fnof;<sub>4</sub></p>
+            <dl class="equation"><dd>x<sub>n &plus; 1</sub> = &minus;0.15 x<sub>n</sub> &plus; 0.28 y<sub>n</sub></dd></dl>
+            <dl class="equation"><dd>y<sub>n &plus; 1</sub> = 0.26 x<sub>n</sub> &plus; 0.24 y<sub>n</sub> &plus; 0.44</dd></dl>
+            <p>This coordinate transformation is chosen 7% of the time and maps any point inside
+                the leaflet (or <em>pinna</em>) represented by the blue triangle to a point inside
+                the alternating corresponding triangle across the stem (without flipping it).
+            </p>
+            <p>The first coordinate transformation draws the stem. The second generates
+                successive copies of the stem and bottom fronds to make the complete fern.
+                The third draws the bottom frond on the left. The fourth draws the bottom
+                frond on the right. The recursive nature of the IFS guarantees that the
+                whole is a larger replica of each frond. Note that the complete fern is
+                within the range &minus;2.1820&nbsp;&lt;&nbsp;<em>x</em>&nbsp;&lt;&nbsp;2.6558
+                and 0&nbsp;&#8924;&nbsp;<em>y</em>&nbsp;&lt;&nbsp;9.9983.
+            </p>
+            <pre>
+<span class="co">// Usage: java Barnsley 10000</span>
+<span class="kw">public class</span> Barnsley {
+    <span class="kw">public static void</span> <span class="me">draw</span>(<span class="kw">int</span> numberOfPoints) {
+        <span class="co">// starting point</span>
+        <span class="kw">double</span> x = <span class="nu">0.5</span><span class="kw">;</span>
+        <span class="kw">double</span> y = <span class="nu">0.0</span><span class="kw">;</span>
+        StdDraw.setScale(<span class="nu">-0.1</span>, <span class="nu">1.1</span>)<span class="kw">;</span> <span class="co">// leave a 10% border</span>
+        StdDraw.clear(StdDraw.<span class="pr">BOOK_LIGHT_BLUE</span>)<span class="kw">;</span> <span class="co">// background color</span>
+        StdDraw.setPenColor(<span class="nu">0</span>, <span class="nu">114</span>, <span class="nu">0</span>)<span class="kw">;</span>  <span class="co">// a shade of green</span>
+        StdDraw.enableDoubleBuffering()<span class="kw">;</span>
+        <span class="co">// repeated choose one of four update rules at random</span>
+        <span class="kw">for</span> (<span class="kw">int</span> i = <span class="nu">0</span><span class="kw">;</span> i < numberOfPoints<span class="kw">;</span> i++) {
+            <span class="kw">double</span> tempx<span class="kw">;</span>
+            <span class="kw">double</span> tempy<span class="kw">;</span>
+            <span class="kw">double</span> r = StdRandom.uniform(<span class="nu">0.0</span>, <span class="nu">1.0</span>)<span class="kw">;</span>
+
+            <span class="co">// stem</span>
+            <span class="kw">if</span> (r <= <span class="nu">0.01</span>) {
+                tempx = <span class="nu">0.50</span><span class="kw">;</span>
+                tempy = <span class="nu">0.16</span> * y<span class="kw">;</span>
+            }
+
+            <span class="co">// largest left-hand leaflet</span>
+            <span class="kw">else if</span> (r <= <span class="nu">0.08</span>) {
+                tempx = <span class="nu">0.20</span> * x - <span class="nu">0.26</span> * y + <span class="nu">0.400</span><span class="kw">;</span>
+                tempy = <span class="nu">0.23</span> * x + <span class="nu">0.22</span> * y - <span class="nu">0.045</span><span class="kw">;</span>
+            }
+
+            <span class="co">// largest right-hand leaflet</span>
+            <span class="kw">else if</span> (r <= <span class="nu">0.15</span>) {
+                tempx = <span class="nu">-0.15</span> * x + <span class="nu">0.28</span> * y + <span class="nu">0.575</span><span class="kw">;</span>
+                tempy = <span class="nu">0.26</span> * x + <span class="nu">0.24</span> * y - <span class="nu">0.086</span><span class="kw">;</span>
+            }
+
+            <span class="co">// successively smaller leaflets</span>
+            <span class="kw">else</span> {
+                tempx = <span class="nu">0.85</span> * x + <span class="nu">0.04</span> * y + <span class="nu">0.075</span><span class="kw">;</span>
+                tempy = <span class="nu">-0.04</span> * x + <span class="nu">0.85</span> * y + <span class="nu">0.180</span><span class="kw">;</span>
+            }
+
+            <span class="co">// update (x, y) and draw point</span>
+            x = tempx<span class="kw">;</span>
+            y = tempy<span class="kw">;</span>
+            StdDraw.point(x, y)<span class="kw">;</span>
+        }
+        StdDraw.show()<span class="kw">;</span>
+    }
+
+    <span class="kw">public static void</span> <span class="me">main</span>(String[] args) {
+        <span class="kw">int</span> n = Integer.parseInt(args[<span class="nu">0</span>]); <span class="co">// number of points to draw</span>
+        draw(n)<span class="kw">;</span>
+    }
+}
+            </pre>
         </div>
         <div class="article">
             <h2 id="title3">Mandelbrot set</h2>
             <h5>June 18, 2020</h5>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Mandel_zoom_00_mandelbrot_set.jpg/1024px-Mandel_zoom_00_mandelbrot_set.jpg" alt="Mandelbot fractal">
-            <p>The Mandelbrot set is the set of complex numbers c for which the function
-                fc(z)=z2+c does not diverge when iterated from z=0, i.e., for which the
-                sequence fc(0),fc(fc(0)), etc., remains bounded in absolute value.</p>
+            <p><img class="imageLeft" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Mandel_zoom_00_mandelbrot_set.jpg/1024px-Mandel_zoom_00_mandelbrot_set.jpg" alt="Mandelbot fractal">
+                The Mandelbrot set is the set of complex numbers c for which the function
+                <span class="equation">&fnof;c(z)=z2+c</span> does not diverge when iterated from <span class="equation">z=0</span>, i.e., for which the
+                sequence <span class="equation">&fnof;c(0),&fnof;c(&fnof;c(0))</span>, etc., remains bounded in absolute value.</p>
+
             <p>Its definition is credited to Adrien Douady who named it in tribute
                 to the mathematician Benoit Mandelbrot. The set is connected to a
                 Julia set, and related Julia sets produce similarly complex fractal
                 shapes.</p>
             <p>Mandelbrot set images may be created by sampling the complex numbers
                 and testing, for each sample point c, whether the sequence
-                fc(0),fc(fc(0)),… goes to infinity (in practice – whether it
+                <span class="equation">&fnof;c(0),&fnof;c(&fnof;c(0)),…</span> goes to infinity (in practice – whether it
                 leaves some predetermined bounded neighborhood of 0 after a
                 predetermined number of iterations). Treating the real and
                 imaginary parts of c as image coordinates on the complex plane,
                 pixels may then be coloured according to how soon the sequence
-                |fc(0)|,|fc(fc(0))|,… crosses an arbitrarily chosen threshold,
+                <span class="equation">|&fnof;c(0)|,|&fnof;c(&fnof;c(0))|,…</span> crosses an arbitrarily chosen threshold,
                 with a special color (usually black) used for the values of c for
                 which the sequence has not crossed the threshold after the
                 predetermined number of iterations (this is necessary to
                 clearly distinguish the Mandelbrot set image from the image
                 of its complement). If c is held constant and the initial value of
-                z—denoted by z0 — is variable instead, one obtains the corresponding
+                z—denoted by <span class="equation">z0</span> — is variable instead, one obtains the corresponding
                 Julia set for each point c in the parameter space of the simple
                 function.</p>
 
@@ -443,7 +601,7 @@ a:hover {
     <span class="kw">public static int</span> <span class="me">mand</span>(Complex z0<span class="kw">,</span> int max) {
         Complex z = z0<span class="kw">;</span>
         <span class="kw">for</span> (<span class="kw">int</span> t = <span class="nu">0</span><span class="kw">;</span> t < max<span class="kw">;</span> t++) {
-            <span class="kw">if</span> (z.abs() > 2.0) <span class="kw">return</span> t<span class="kw">;</span>
+            <span class="kw">if</span> (z.abs() > <span class="nu">2.0</span>) <span class="kw">return</span> t<span class="kw">;</span>
             z = z.times(z).plus(z0)<span class="kw">;</span>
         }
         <span class="kw">return</span> max<span class="kw">;</span>
@@ -476,9 +634,8 @@ a:hover {
         <div class="article">
             <h2 id="title4">Julia set</h2>
             <h5>June 18, 2020</h5>
-            <div class="fakeImage" style="height:200px;">Julia set</div>
-            <p>Some text..</p>
-            <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+            <p><img class="imageLeft" src="https://qanon.news/images/14c81416c9dd0f1f2aed179c7cba3e69054e3055f4941c89343721b858d5c658.gif" alt="Julia">
+                Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
         </div>
     </div>
 </div>
