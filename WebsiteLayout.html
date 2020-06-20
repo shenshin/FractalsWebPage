@@ -635,7 +635,320 @@ a:hover {
             <h2 id="title4">Julia set</h2>
             <h5>June 18, 2020</h5>
             <p><img class="imageLeft" src="https://qanon.news/images/14c81416c9dd0f1f2aed179c7cba3e69054e3055f4941c89343721b858d5c658.gif" alt="Julia">
-                Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+            Article here
+            </p>
+            <pre>
+<span class="co">// Usage: % java ColorJulia -0.75 0.1 < mandel.txt</span>
+<span class="co">//        % java ColorJulia -1.25 0 < mandel.txt</span>
+<span class="co">//        % java ColorJulia 0.1 0.7 < mandel.txt</span>
+<span class="kw">import java.awt.Color;</span>
+
+<span class="kw">public class</span> ColorJulia {
+<span class="co">    // return number of iterations to check z is in the Julia set of c</span>
+    <span class="kw">static int</span> <span class="me">julia</span>(Complex c, Complex z, <span class="kw">int</span> maximumIterations) {
+        <span class="kw">for</span> (<span class="kw">int</span> t = <span class="nu">0</span><span class="kw">;</span> t < maximumIterations<span class="kw">;</span> t++) {
+            <span class="kw">if</span> (z.abs() > <span class="nu">2.0</span>) <span class="kw">return</span> t<span class="kw">;</span>
+            z = z.times(z).plus(c)<span class="kw">;</span>
+        }
+        <span class="kw">return</span> maximumIterations - <span class="nu">1</span><span class="kw">;</span>
+    }
+
+    <span class="kw">public static void</span> <span class="me">main</span>(String[] args) {
+        <span class="kw">double</span> real = Double.parseDouble(args[<span class="nu">0</span>])<span class="kw">;</span> <span class="co">// a</span>
+        <span class="kw">double</span> imag = Double.parseDouble(args[<span class="nu">1</span>])<span class="kw">;</span> <span class="co">// b</span>
+        Complex c = <span class="kw">new</span> Complex(real, imag); <span class="co">// c = a + ib</span>
+        <span class="kw">double</span> xmin = <span class="nu">-2.0</span><span class="kw">;</span>
+        <span class="kw">double</span> ymin = <span class="nu">-2.0</span><span class="kw">;</span>
+        <span class="kw">double</span> width = <span class="nu">4.0</span><span class="kw">;</span>
+        <span class="kw">double</span> height = <span class="nu">4.0</span><span class="kw">;</span>
+
+        <span class="kw">int</span> n = <span class="nu">512</span><span class="kw">;</span>
+        <span class="kw">int</span> ITERS  = <span class="nu">256</span><span class="kw">;</span>
+
+        <span class="co">// read in color map</span>
+        Color[] colors = <span class="kw">new</span> Color[ITERS]<span class="kw">;</span>
+        <span class="kw">for</span> (<span class="kw">int</span> t = <span class="nu">0</span><span class="kw">;</span> t < ITERS<span class="kw">;</span> t++) {
+            <span class="kw">int</span> r = StdIn.readInt()<span class="kw">;</span>
+            <span class="kw">int</span> g = StdIn.readInt()<span class="kw">;</span>
+            <span class="kw">int</span> b = StdIn.readInt()<span class="kw">;</span>
+            colors[t] = <span class="kw">new</span> Color(r, g, b)<span class="kw">;</span>
+        }
+        Picture picture = <span class="kw">new</span> Picture(n, n)<span class="kw">;</span>
+
+        <span class="kw">for</span> (<span class="kw">int</span> col = <span class="nu">0</span><span class="kw">;</span> col < n<span class="kw">;</span> col++) {
+            <span class="kw">for</span> (<span class="kw">int</span> row = 0<span class="kw">;</span> row < n<span class="kw">;</span> row++) {
+                <span class="kw">double</span> x = xmin + col * width / n<span class="kw">;</span>
+                <span class="kw">double</span> y = ymin + row * height / n<span class="kw">;</span>
+                Complex z = <span class="kw">new</span> Complex(x, y)<span class="kw">;</span>
+                <span class="kw">int</span> t = julia(c, z, ITERS)<span class="kw">;</span>
+                picture.set(col, n - <span class="nu">1</span> - row, colors[t])<span class="kw">;</span>
+            }
+        }
+        picture.show()<span class="kw">;</span>
+    }
+
+}
+            </pre>
+            <p>To run the code above you should put RGB colors in a file named 'mandel.txt':
+            </p>
+            <pre style="height: 100px">
+0 0 0
+0 0 168
+0 168 0
+0 168 168
+168 0 0
+168 0 168
+168 84 0
+168 168 168
+84 84 84
+84 84 252
+84 252 84
+84 252 252
+252 84 84
+252 84 252
+252 252 84
+252 252 252
+0 0 0
+20 20 20
+32 32 32
+44 44 44
+56 56 56
+68 68 68
+80 80 80
+96 96 96
+112 112 112
+128 128 128
+144 144 144
+160 160 160
+180 180 180
+200 200 200
+224 224 224
+252 252 252
+0 0 252
+64 0 252
+124 0 252
+188 0 252
+252 0 252
+252 0 188
+252 0 124
+252 0 64
+252 0 0
+252 64 0
+252 124 0
+252 188 0
+252 252 0
+188 252 0
+124 252 0
+64 252 0
+0 252 0
+0 252 64
+0 252 124
+0 252 188
+0 252 252
+0 188 252
+0 124 252
+0 64 252
+124 124 252
+156 124 252
+188 124 252
+220 124 252
+252 124 252
+252 124 220
+252 124 188
+252 124 156
+252 124 124
+252 156 124
+252 188 124
+252 220 124
+252 252 124
+220 252 124
+188 252 124
+156 252 124
+124 252 124
+124 252 156
+124 252 188
+124 252 220
+124 252 252
+124 220 252
+124 188 252
+124 156 252
+180 180 252
+196 180 252
+216 180 252
+232 180 252
+252 180 252
+252 180 232
+252 180 216
+252 180 196
+252 180 180
+252 196 180
+252 216 180
+252 232 180
+252 252 180
+232 252 180
+216 252 180
+196 252 180
+180 252 180
+180 252 196
+180 252 216
+180 252 232
+180 252 252
+180 232 252
+180 216 252
+180 196 252
+0 0 112
+28 0 112
+56 0 112
+84 0 112
+112 0 112
+112 0 84
+112 0 56
+112 0 28
+112 0 0
+112 28 0
+112 56 0
+112 84 0
+112 112 0
+84 112 0
+56 112 0
+28 112 0
+0 112 0
+0 112 28
+0 112 56
+0 112 84
+0 112 112
+0 84 112
+0 56 112
+0 28 112
+56 56 112
+68 56 112
+84 56 112
+96 56 112
+112 56 112
+112 56 96
+112 56 84
+112 56 68
+112 56 56
+112 68 56
+112 84 56
+112 96 56
+112 112 56
+96 112 56
+84 112 56
+68 112 56
+56 112 56
+56 112 68
+56 112 84
+56 112 96
+56 112 112
+56 96 112
+56 84 112
+56 68 112
+80 80 112
+88 80 112
+96 80 112
+104 80 112
+112 80 112
+112 80 104
+112 80 96
+112 80 88
+112 80 80
+112 88 80
+112 96 80
+112 104 80
+112 112 80
+104 112 80
+96 112 80
+88 112 80
+80 112 80
+80 112 88
+80 112 96
+80 112 104
+80 112 112
+80 104 112
+80 96 112
+80 88 112
+0 0 64
+16 0 64
+32 0 64
+48 0 64
+64 0 64
+64 0 48
+64 0 32
+64 0 16
+64 0 0
+64 16 0
+64 32 0
+64 48 0
+64 64 0
+48 64 0
+32 64 0
+16 64 0
+0 64 0
+0 64 16
+0 64 32
+0 64 48
+0 64 64
+0 48 64
+0 32 64
+0 16 64
+32 32 64
+40 32 64
+48 32 64
+56 32 64
+64 32 64
+64 32 56
+64 32 48
+64 32 40
+64 32 32
+64 40 32
+64 48 32
+64 56 32
+64 64 32
+56 64 32
+48 64 32
+40 64 32
+32 64 32
+32 64 40
+32 64 48
+32 64 56
+32 64 64
+32 56 64
+32 48 64
+32 40 64
+44 44 64
+48 44 64
+52 44 64
+60 44 64
+64 44 64
+64 44 60
+64 44 52
+64 44 48
+64 44 44
+64 48 44
+64 52 44
+64 60 44
+64 64 44
+60 64 44
+52 64 44
+48 64 44
+44 64 44
+44 64 48
+44 64 52
+44 64 60
+44 64 64
+44 60 64
+44 52 64
+44 48 64
+0 0 0
+0 0 0
+0 0 0
+0 0 0
+0 0 0
+0 0 0
+0 0 0
+0 0 0
+            </pre>
         </div>
     </div>
 </div>
