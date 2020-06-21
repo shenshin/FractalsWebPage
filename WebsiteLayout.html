@@ -42,7 +42,7 @@ a:hover {
 }
 
 .header {
-    padding: 30px 0 10px 0;
+    padding: 3em 0 1em 0;
     text-align: center;
     color: var(--headerTextColor);
     background-color: var(--headerBGColor);
@@ -51,10 +51,12 @@ a:hover {
     background-image: url("https://i.artfile.ru/1920x1080_783224_[www.ArtFile.ru].jpg");
 }
 .header h1 {
-     font-size: 4em;/* Compared to body */
-    line-height: 0;
+    margin: 0;
+    font-size: 4em;/* Compared to body */
+    line-height: 1.5em;
 }
 .header p {
+    margin: 0;
     font-size: 1.1em;
     letter-spacing: 0.32em;
 }
@@ -286,6 +288,9 @@ a:hover {
 /* Change the appearance of navigation bar
     when screen gets narrow */
 @media screen and (max-width: 450px) {
+    .header p {
+        letter-spacing: 0.27em;
+    }
     .topNavigationBar {
         /* change menu buttons alignment in compact mode 
         to stretch instead of center */
