@@ -23,9 +23,6 @@
     --footerBGColor: #03141a; /* Secondary 2 5 */
     --footerBorderColor: #4E6D76;
     --fakeImgBGColor: black;
-
-    /* Include padding and border in the element's total width and height */
-    /*box-sizing: border-box;*/
 }
 
 body {
@@ -48,7 +45,6 @@ a:hover {
     text-align: center;
     color: var(--headerTextColor);
     background-color: var(--headerBGColor);
-    /* border-bottom: 2px solid var(--pageBGColor); */
     margin-bottom: 5px;
     font-family: fantasy;
     background-image: url("https://i.artfile.ru/1920x1080_783224_[www.ArtFile.ru].jpg");
@@ -63,7 +59,7 @@ a:hover {
 
 .topNavigationBar {
     display: flex; /* CSS FlexBox container initialization */
-    flex-direction: row; /* Allign items in a row */
+    flex-direction: row; /* Align items in a row */
     justify-content: flex-start; /* Main (x) axis justify left*/
     align-items: center; /* Cross (y) axis justify */
     background-color: var(--topNavigationBarBGColor);
@@ -164,6 +160,11 @@ a:hover {
 .imageLeft, .imageRight {
     width: 40%;
     border: 1px solid var(--articleBorderColor);
+    background-color: var(--articleBorderColor);
+    color: #041C23;
+    text-align: center;
+    line-height: 0;
+    font-style: italic;
 }
 .imageLeft {
     float: left;
@@ -172,6 +173,9 @@ a:hover {
 .imageRight {
     float: right;
     margin: 0 0 15px 15px;
+}
+.imageLeft img, .imageRight img {
+    width: 100%;
 }
 /* Pre-formatted text for displaying Java code */
 .article pre {
@@ -201,11 +205,7 @@ a:hover {
     font-weight: bold;
 }
 .footer {
-    display: flex;
-    flex-direction: row; /* Allign items in a row */
-    justify-content: center; /* Main (x) axis justify left*/
-    align-items: center; /* Cross (y) axis justify */
-    padding: 20px;
+    padding: 20px 0 10px 0;
     margin-top: 5px;
     color: var(--footerTextColor);
     background-color: var(--footerBGColor);
@@ -213,14 +213,23 @@ a:hover {
     border-bottom: 1px solid var(--footerBorderColor);
     font-size: 0.8em;
     letter-spacing: 0.1em;
+    text-align: center;
 }
-.footer a {
+.footer .menu {
+    display: flex;
+    flex-direction: row; /* Allign items in a row */
+    justify-content: space-evenly; /* Main (x) axis justify left*/
+    align-items: center; /* Cross (y) axis justify */
+}
+.footer .menu a {
     text-decoration: none;
-    color: var(--footerTextColor);
     padding-right: 10px;
 }
-.footer a:hover {
+.footer .menu a:hover {
     text-decoration: underline;
+}
+.footer .menu p {
+    line-height: 0;
 }
 #notaBene {
     color: rgba(242,206,255,1);
@@ -298,12 +307,12 @@ a:hover {
     <title></title>
 </head>
 <body>
-
+<!-----------------------------Header--------------------------------->
 <div class="header">
     <h1>Famous Fractals</h1>
     <p>Fractals are programmer's best toys.</p>
 </div>
-
+<!-----------------------Top Navigation Bar--------------------------->
 <div class="topNavigationBar">
     <a href="#title1" title="Sierpinski" class="button">
         Sierpinski triangle
@@ -318,14 +327,14 @@ a:hover {
         Julia set
     </a>
     <a href="https://github.com/shenshin/FractalsWebPage" title="See this page on GitHub" class="rightMenuItem">
-        <!-- Scalable Vector Graphics GitHub cat logo-->
+        <!---------------Scalable Vector Graphics GitHub cat logo---------------->
         <svg width="27" height="27" viewBox="0 0 16 16" aria-hidden="true">
             <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
         </svg>
     </a>
 </div>
-
 <div class="pageContents">
+    <!-----------------------Left Menu--------------------------->
     <div class="menuColumn">
         <div class="article">
             <h3>Fractals</h3>
@@ -337,6 +346,7 @@ a:hover {
             </ul>
         </div>
     </div>
+    <!-----------------------Articles Column--------------------------->
     <div class="contentsColumn">
         <div class="article">
             <h2 id="top">Welcome to my Fractals page</h2>
@@ -352,10 +362,15 @@ a:hover {
             <p id="notaBene">N.B. This is a flexible page. Try to resize it. When the screen width
             gets less then 800 and 450 pixels, page blocks are being reordered.</p>
         </div>
+        <!-----------------------Sierpinsky triangle--------------------------->
         <div class="article">
-            <h2 id="title1">Serpinsky triangle</h2>
+            <h2 id="title1">Sierpinsky triangle</h2>
             <h5>June 18, 2020</h5>
-            <p><img class="imageLeft" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Sierpinski_tetrahedron_by_George_W._Hart.jpg/1200px-Sierpinski_tetrahedron_by_George_W._Hart.jpg" alt="Sierpinski triangle 3D">
+            <div class="imageLeft">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Sierpinski_tetrahedron_by_George_W._Hart.jpg/1200px-Sierpinski_tetrahedron_by_George_W._Hart.jpg" alt="Sierpinski triangle 3D">
+                <p>Sierpinski triangle 3D visualization</p>
+            </div>
+            <p>
                 The Sierpi&nacute;ski triangle (sometimes spelled Sierpinski), also
                 called the Sierpi&nacute;ski gasket or Sierpi&nacute;ski sieve, is a fractal
                 attractive fixed set with the overall shape of an equilateral
@@ -421,11 +436,15 @@ a:hover {
 }
             </pre>
         </div>
+        <!---------------------------Barnsley Fern------------------------------->
         <div class="article">
             <h2 id="title2">Barnsley fern</h2>
             <h5>June 18, 2020</h5>
-
-            <p><img class="imageLeft" src="https://live.staticflickr.com/3543/3373234918_fe89f5a88d.jpg" alt="Asplenium adiantum-nigrum">
+            <div class="imageLeft">
+                <img src="https://live.staticflickr.com/3543/3373234918_fe89f5a88d.jpg" alt="Asplenium adiantum-nigrum">
+                <p>Fern Asplenium adiantum-nigrum</p>
+            </div>
+            <p>
                 The Barnsley fern is a fractal named after the British mathematician
                 Michael Barnsley who first described it in his book Fractals Everywhere.
                 He made it to resemble the black spleenwort, Asplenium adiantum-nigrum.
@@ -450,7 +469,11 @@ a:hover {
                 and technology, but most specifically plant structures.
             </p>
             <h2 style="clear: both">Construction</h2>
-            <p><img class="imageRight" src="https://i.ytimg.com/vi/iGMGVpLMtMs/maxresdefault.jpg" alt="Fern">
+            <div class="imageRight">
+                <img src="https://i.ytimg.com/vi/iGMGVpLMtMs/maxresdefault.jpg" alt="Fern">
+                <p>Barnsley fern</p>
+            </div>
+            <p>
                 The first point drawn is at the origin (<i>x</i><sub>0</sub> = 0, <i>y</i><sub>0</sub> = 0)
                 and then the new points are iteratively computed by randomly applying one of the
                 following four coordinate transformations:
@@ -490,8 +513,9 @@ a:hover {
                 The third draws the bottom frond on the left. The fourth draws the bottom
                 frond on the right. The recursive nature of the IFS guarantees that the
                 whole is a larger replica of each frond. Note that the complete fern is
-                within the range &minus;2.1820&nbsp;&lt;&nbsp;<em>x</em>&nbsp;&lt;&nbsp;2.6558
-                and 0&nbsp;&#8924;&nbsp;<em>y</em>&nbsp;&lt;&nbsp;9.9983.
+                within the range <span class="equation">&minus;2.1820&nbsp;&lt;&nbsp;<em>x</em>&nbsp;&lt;&nbsp;2.6558</span>
+                and <span class="equation">0&nbsp;&#8924;&nbsp;<em>y</em>&nbsp;&lt;&nbsp;9.9983</span>.
+                <a href="https://en.wikipedia.org/wiki/Barnsley_fern"><sup>[WikipediA]</sup></a>
             </p>
             <pre>
 <span class="co">// Usage: java Barnsley 10000</span>
@@ -549,13 +573,20 @@ a:hover {
 }
             </pre>
         </div>
+
+        <!-----------------------Mandelbrot Set--------------------------->
         <div class="article">
             <h2 id="title3">Mandelbrot set</h2>
             <h5>June 18, 2020</h5>
-            <p><img class="imageLeft" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Mandel_zoom_00_mandelbrot_set.jpg/1024px-Mandel_zoom_00_mandelbrot_set.jpg" alt="Mandelbot fractal">
+            <div class="imageLeft">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Mandel_zoom_00_mandelbrot_set.jpg/1024px-Mandel_zoom_00_mandelbrot_set.jpg" alt="Mandelbot fractal">
+                <p>Mandelbrot set visualization</p>
+            </div>
+            <p>
                 The Mandelbrot set is the set of complex numbers c for which the function
-                <span class="equation">&fnof;c(z)=z2+c</span> does not diverge when iterated from <span class="equation">z=0</span>, i.e., for which the
-                sequence <span class="equation">&fnof;c(0),&fnof;c(&fnof;c(0))</span>, etc., remains bounded in absolute value.</p>
+                <span class="equation">&nbsp;&fnof;<sub>c</sub>(z)&nbsp;=&nbsp;z<sup>2</sup>&nbsp;+&nbsp;c&nbsp;</span> does not diverge when iterated
+                from <span class="equation">&nbsp;z&nbsp;=&nbsp;0&nbsp;</span>, i.e., for which the
+                sequence <span class="equation">&nbsp;&fnof;<sub>c</sub>(0),&nbsp;&fnof;<sub>c</sub>(&fnof;<sub>c</sub>(0))</span>, etc., remains bounded in absolute value.</p>
 
             <p>Its definition is credited to Adrien Douady who named it in tribute
                 to the mathematician Benoit Mandelbrot. The set is connected to a
@@ -563,21 +594,23 @@ a:hover {
                 shapes.</p>
             <p>Mandelbrot set images may be created by sampling the complex numbers
                 and testing, for each sample point c, whether the sequence
-                <span class="equation">&fnof;c(0),&fnof;c(&fnof;c(0)),…</span> goes to infinity (in practice – whether it
+                <span class="equation"> &fnof;<sub>c</sub>(0),&nbsp;&fnof;<sub>c</sub>(&fnof;<sub>c</sub>(0)),&hellip;&nbsp;</span> goes to
+                infinity (in practice &mdash; whether it
                 leaves some predetermined bounded neighborhood of 0 after a
                 predetermined number of iterations). Treating the real and
                 imaginary parts of c as image coordinates on the complex plane,
                 pixels may then be coloured according to how soon the sequence
-                <span class="equation">|&fnof;c(0)|,|&fnof;c(&fnof;c(0))|,…</span> crosses an arbitrarily chosen threshold,
+                <span class="equation">&vert;&nbsp;&fnof;<sub>c</sub>(0)&nbsp;&vert;,&nbsp;&vert;&nbsp;&fnof;<sub>c</sub>(&fnof;<sub>c</sub>(0))&nbsp;&vert;,&hellip;&nbsp;</span>
+                crosses an arbitrarily chosen threshold,
                 with a special color (usually black) used for the values of c for
                 which the sequence has not crossed the threshold after the
                 predetermined number of iterations (this is necessary to
                 clearly distinguish the Mandelbrot set image from the image
                 of its complement). If c is held constant and the initial value of
-                z—denoted by <span class="equation">z0</span> — is variable instead, one obtains the corresponding
+                z&ndash;denoted by <span class="equation">z<sub>0</sub></span> &mdash; is variable instead,
+                one obtains the corresponding
                 Julia set for each point c in the parameter space of the simple
                 function.</p>
-
             <p>Images of the Mandelbrot set exhibit an elaborate and infinitely
                 complicated boundary that reveals progressively ever-finer recursive
                 detail at increasing magnifications. In other words, the boundary
@@ -586,12 +619,12 @@ a:hover {
                 The set's boundary also incorporates smaller versions of the main
                 shape, so the fractal property of self-similarity applies to the
                 entire set, and not just to its parts.</p>
-
             <p>The Mandelbrot set has become popular outside mathematics both
                 for its aesthetic appeal and as an example of a complex structure
                 arising from the application of simple rules. It is one of
                 the best-known examples of mathematical visualization and
-                mathematical beauty.</p>
+                mathematical beauty.<a href="https://en.wikipedia.org/wiki/Mandelbrot_set"><sup>[WikipediA]</sup></a>
+            </p>
             <pre>
 <span class="kw">import</span> java.awt.Color<span class="kw">;</span>
 
@@ -631,11 +664,30 @@ a:hover {
 }
             </pre>
         </div>
+        <!-----------------------Julia Set--------------------------->
         <div class="article">
             <h2 id="title4">Julia set</h2>
             <h5>June 18, 2020</h5>
-            <p><img class="imageLeft" src="https://qanon.news/images/14c81416c9dd0f1f2aed179c7cba3e69054e3055f4941c89343721b858d5c658.gif" alt="Julia">
-            Article here
+            <div class="imageLeft">
+                <img src="https://qanon.news/images/14c81416c9dd0f1f2aed179c7cba3e69054e3055f4941c89343721b858d5c658.gif" alt="Julia">
+                <p>Julia set</p>
+            </div>
+            <p>
+                In the context of complex dynamics, a topic of mathematics, the Julia set
+                and the Fatou set are two complementary sets (Julia "laces" and Fatou "dusts")
+                defined from a function. Informally, the Fatou set of the function consists
+                of values with the property that all nearby values behave similarly under
+                repeated iteration of the function, and the Julia set consists of values
+                such that an arbitrarily small perturbation can cause drastic changes in
+                the sequence of iterated function values. Thus the behavior of the function
+                on the Fatou set is "regular", while on the Julia set its behavior is "chaotic".
+            </p>
+            <p>
+                The Julia set of a function f is commonly denoted <span class="equation">J(f)</span>,
+                and the Fatou set is denoted <span class="equation">F(f)</span>. These sets are
+                named after the French mathematicians Gaston Julia and Pierre Fatou whose work
+                began the study of complex dynamics during the early 20th century.
+                <a href="https://en.wikipedia.org/wiki/Julia_set"><sup>[WikipediA]</sup></a>
             </p>
             <pre>
 <span class="co">// Usage: % java ColorJulia -0.75 0.1 < mandel.txt</span>
@@ -689,275 +741,18 @@ a:hover {
 
 }
             </pre>
-            <p>To run the code above you should put RGB colors in a file named 'mandel.txt':
-            </p>
-            <pre style="height: 100px">
-0 0 0
-0 0 168
-0 168 0
-0 168 168
-168 0 0
-168 0 168
-168 84 0
-168 168 168
-84 84 84
-84 84 252
-84 252 84
-84 252 252
-252 84 84
-252 84 252
-252 252 84
-252 252 252
-0 0 0
-20 20 20
-32 32 32
-44 44 44
-56 56 56
-68 68 68
-80 80 80
-96 96 96
-112 112 112
-128 128 128
-144 144 144
-160 160 160
-180 180 180
-200 200 200
-224 224 224
-252 252 252
-0 0 252
-64 0 252
-124 0 252
-188 0 252
-252 0 252
-252 0 188
-252 0 124
-252 0 64
-252 0 0
-252 64 0
-252 124 0
-252 188 0
-252 252 0
-188 252 0
-124 252 0
-64 252 0
-0 252 0
-0 252 64
-0 252 124
-0 252 188
-0 252 252
-0 188 252
-0 124 252
-0 64 252
-124 124 252
-156 124 252
-188 124 252
-220 124 252
-252 124 252
-252 124 220
-252 124 188
-252 124 156
-252 124 124
-252 156 124
-252 188 124
-252 220 124
-252 252 124
-220 252 124
-188 252 124
-156 252 124
-124 252 124
-124 252 156
-124 252 188
-124 252 220
-124 252 252
-124 220 252
-124 188 252
-124 156 252
-180 180 252
-196 180 252
-216 180 252
-232 180 252
-252 180 252
-252 180 232
-252 180 216
-252 180 196
-252 180 180
-252 196 180
-252 216 180
-252 232 180
-252 252 180
-232 252 180
-216 252 180
-196 252 180
-180 252 180
-180 252 196
-180 252 216
-180 252 232
-180 252 252
-180 232 252
-180 216 252
-180 196 252
-0 0 112
-28 0 112
-56 0 112
-84 0 112
-112 0 112
-112 0 84
-112 0 56
-112 0 28
-112 0 0
-112 28 0
-112 56 0
-112 84 0
-112 112 0
-84 112 0
-56 112 0
-28 112 0
-0 112 0
-0 112 28
-0 112 56
-0 112 84
-0 112 112
-0 84 112
-0 56 112
-0 28 112
-56 56 112
-68 56 112
-84 56 112
-96 56 112
-112 56 112
-112 56 96
-112 56 84
-112 56 68
-112 56 56
-112 68 56
-112 84 56
-112 96 56
-112 112 56
-96 112 56
-84 112 56
-68 112 56
-56 112 56
-56 112 68
-56 112 84
-56 112 96
-56 112 112
-56 96 112
-56 84 112
-56 68 112
-80 80 112
-88 80 112
-96 80 112
-104 80 112
-112 80 112
-112 80 104
-112 80 96
-112 80 88
-112 80 80
-112 88 80
-112 96 80
-112 104 80
-112 112 80
-104 112 80
-96 112 80
-88 112 80
-80 112 80
-80 112 88
-80 112 96
-80 112 104
-80 112 112
-80 104 112
-80 96 112
-80 88 112
-0 0 64
-16 0 64
-32 0 64
-48 0 64
-64 0 64
-64 0 48
-64 0 32
-64 0 16
-64 0 0
-64 16 0
-64 32 0
-64 48 0
-64 64 0
-48 64 0
-32 64 0
-16 64 0
-0 64 0
-0 64 16
-0 64 32
-0 64 48
-0 64 64
-0 48 64
-0 32 64
-0 16 64
-32 32 64
-40 32 64
-48 32 64
-56 32 64
-64 32 64
-64 32 56
-64 32 48
-64 32 40
-64 32 32
-64 40 32
-64 48 32
-64 56 32
-64 64 32
-56 64 32
-48 64 32
-40 64 32
-32 64 32
-32 64 40
-32 64 48
-32 64 56
-32 64 64
-32 56 64
-32 48 64
-32 40 64
-44 44 64
-48 44 64
-52 44 64
-60 44 64
-64 44 64
-64 44 60
-64 44 52
-64 44 48
-64 44 44
-64 48 44
-64 52 44
-64 60 44
-64 64 44
-60 64 44
-52 64 44
-48 64 44
-44 64 44
-44 64 48
-44 64 52
-44 64 60
-44 64 64
-44 60 64
-44 52 64
-44 48 64
-0 0 0
-0 0 0
-0 0 0
-0 0 0
-0 0 0
-0 0 0
-0 0 0
-0 0 0
-            </pre>
         </div>
     </div>
 </div>
 
 <div class="footer">
-  <a href="#title1" title="Sierpinski">Sierpinski&nbsp;triangle</a>
-  <a href="#title2" title="Barnsley">Barnsley&nbsp;fern</a>
-  <a href="#title3" title="Mandelbrot">Mandelbrot&nbsp;set</a>
-    <a href="#title4" title="Julia">Julia&nbsp;set</a>
+    <div class="menu">
+        <a href="#title1" title="Sierpinski">Sierpinski&nbsp;triangle</a>
+        <a href="#title2" title="Barnsley">Barnsley&nbsp;fern</a>
+        <a href="#title3" title="Mandelbrot">Mandelbrot&nbsp;set</a>
+        <a href="#title4" title="Julia">Julia&nbsp;set</a>
+    </div>
+    <p>&copy; 2020 Alexander Shenshin for <a href="https://www.hackyourfuture.net">HackYourFuture</a></p>
 </div>
 
 </body>
