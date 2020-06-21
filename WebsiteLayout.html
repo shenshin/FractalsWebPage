@@ -162,6 +162,34 @@ a:hover {
     /* Don't let floating images hang outside of containing article */
     overflow-y: hidden;
 }
+/********************* Table in the article **********************/
+.article table {
+    /* Remove extra borders */
+    border-collapse: collapse;
+    margin-bottom: 1em;
+}
+.article .leftTableColumn {
+    width: 40%;
+}
+.article .rightTableColumn {
+    width: 60%;
+}
+.article table, th, td {
+    border: 1px solid var(--articleBorderColor);
+}
+.article table p, .equation {
+    margin: 0;
+}
+.article table .equation {
+    line-height: 1.5em;
+}
+.article table th { /* Table header */
+    color: #041C23;
+    background-color: var(--articleBorderColor);
+}
+.article table td {
+    padding: 1em;
+}
 /* Left and right aligned images */
 .imageLeft, .imageRight {
     width: 40%;
@@ -488,45 +516,79 @@ a:hover {
                 and technology, but most specifically plant structures.
             </p>
             <h2 style="clear: both">Construction</h2>
-            <div class="imageRight">
-                <img src="https://i.ytimg.com/vi/iGMGVpLMtMs/maxresdefault.jpg" alt="Fern">
-                <p>Barnsley fern</p>
-            </div>
             <p>
                 The first point drawn is at the origin (<i>x</i><sub>0</sub> = 0, <i>y</i><sub>0</sub> = 0)
                 and then the new points are iteratively computed by randomly applying one of the
                 following four coordinate transformations:
             </p>
-            <p class="equation">&fnof;<sub>1</sub></p>
-            <dl class="equation"><dd>x<sub>n + 1</sub> = 0</dd></dl>
-            <dl class="equation"><dd>y<sub>n + 1</sub> = 0.16 y<sub>n</sub></dd></dl>
-            <p>This coordinate transformation is chosen 1% of the time and just maps any point to
-                a point in the first line segment at the base of the stem. This part of the figure
-                is the first to be completed during the course of iterations.
-            </p>
-            <p class="equation"><br>
-                <i>&fnof;</i><sub>2</sub>
-            </p>
-            <dl class="equation"><dd>x<sub>n &plus; 1</sub> = 0.85 x<sub>n</sub> &plus; 0.04 y<sub>n</sub></dd></dl>
-            <dl class="equation"><dd>y<sub>n &plus; 1</sub> = &minus;0.04 x<sub>n</sub> &plus; 0.85 y<sub>n</sub> &plus; 1.6</dd></dl>
-            <p>This coordinate transformation is chosen 85% of the time and maps any point inside
-                the leaflet represented by the red triangle to a point inside the opposite,
-                smaller leaflet represented by the blue triangle in the figure.
-            </p>
-            <p class="equation"><i>&fnof;</i><sub>3</sub></p>
-            <dl class="equation"><dd>x<sub>n &plus; 1</sub> = 0.2 x<sub>n></sub>&nbsp;&minus;&nbsp;0.26&nbsp;y<sub>n</sub></dd></dl>
-            <dl class="equation"><dd>y<sub>n &plus; 1</sub> = 0.23 x<sub>n</sub>&nbsp;&plus;&nbsp;0.22 y<sub>n</sub>&nbsp;&plus;&nbsp;1.6</dd></dl>
-            <p>This coordinate transformation is chosen 7% of the time and maps any point inside the
-                leaflet (or <em>pinna</em>) represented by the blue triangle to a point inside
-                the alternating corresponding triangle across the stem (it flips it).
-            </p>
-            <p class="equation">&fnof;<sub>4</sub></p>
-            <dl class="equation"><dd>x<sub>n &plus; 1</sub> = &minus;0.15 x<sub>n</sub> &plus; 0.28 y<sub>n</sub></dd></dl>
-            <dl class="equation"><dd>y<sub>n &plus; 1</sub> = 0.26 x<sub>n</sub> &plus; 0.24 y<sub>n</sub> &plus; 0.44</dd></dl>
-            <p>This coordinate transformation is chosen 7% of the time and maps any point inside
-                the leaflet (or <em>pinna</em>) represented by the blue triangle to a point inside
-                the alternating corresponding triangle across the stem (without flipping it).
-            </p>
+            <table>
+                <thead>
+                    <tr>
+                        <th class="leftTableColumn">Transformation</th>
+                        <th class="rightTableColumn">Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="leftTableColumn">
+                            <p class="equation">&fnof;<sub>1</sub></p>
+                            <dl class="equation"><dd>x<sub>n + 1</sub> = 0</dd></dl>
+                            <dl class="equation"><dd>y<sub>n + 1</sub> = 0.16 y<sub>n</sub></dd></dl>
+                        </td>
+                        <td class="rightTableColumn">
+                            <p>This coordinate transformation is chosen 1% of the time and just maps any point to
+                                a point in the first line segment at the base of the stem. This part of the figure
+                                is the first to be completed during the course of iterations.
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="leftTableColumn">
+                            <p class="equation"><br>
+                                <i>&fnof;</i><sub>2</sub>
+                            </p>
+                            <dl class="equation"><dd>x<sub>n &plus; 1</sub> = 0.85 x<sub>n</sub> &plus; 0.04 y<sub>n</sub></dd></dl>
+                            <dl class="equation"><dd>y<sub>n &plus; 1</sub> = &minus;0.04 x<sub>n</sub> &plus; 0.85 y<sub>n</sub> &plus; 1.6</dd></dl>
+                        </td>
+                        <td class="rightTableColumn">
+                            <p>This coordinate transformation is chosen 85% of the time and maps any point inside
+                                the leaflet represented by the red triangle to a point inside the opposite,
+                                smaller leaflet represented by the blue triangle in the figure.
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="leftTableColumn">
+                            <p class="equation"><i>&fnof;</i><sub>3</sub></p>
+                            <dl class="equation"><dd>x<sub>n &plus; 1</sub> = 0.2 x<sub>n></sub>&nbsp;&minus;&nbsp;0.26&nbsp;y<sub>n</sub></dd></dl>
+                            <dl class="equation"><dd>y<sub>n &plus; 1</sub> = 0.23 x<sub>n</sub>&nbsp;&plus;&nbsp;0.22 y<sub>n</sub>&nbsp;&plus;&nbsp;1.6</dd></dl>
+                        </td>
+                        <td class="rightTableColumn">
+                            <p>This coordinate transformation is chosen 7% of the time and maps any point inside the
+                                leaflet (or <em>pinna</em>) represented by the blue triangle to a point inside
+                                the alternating corresponding triangle across the stem (it flips it).
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="leftTableColumn">
+                            <p class="equation">&fnof;<sub>4</sub></p>
+                            <dl class="equation"><dd>x<sub>n &plus; 1</sub> = &minus;0.15 x<sub>n</sub> &plus; 0.28 y<sub>n</sub></dd></dl>
+                            <dl class="equation"><dd>y<sub>n &plus; 1</sub> = 0.26 x<sub>n</sub> &plus; 0.24 y<sub>n</sub> &plus; 0.44</dd></dl>
+                        </td>
+                        <td class="rightTableColumn">
+                            <p>This coordinate transformation is chosen 7% of the time and maps any point inside
+                                the leaflet (or <em>pinna</em>) represented by the blue triangle to a point inside
+                                the alternating corresponding triangle across the stem (without flipping it).
+                            </p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="imageRight">
+                <img src="https://i.ytimg.com/vi/iGMGVpLMtMs/maxresdefault.jpg" alt="Fern">
+                <p>Barnsley fern</p>
+            </div>
             <p>The first coordinate transformation draws the stem. The second generates
                 successive copies of the stem and bottom fronds to make the complete fern.
                 The third draws the bottom frond on the left. The fourth draws the bottom
