@@ -14,8 +14,8 @@
     --topNavigationBarButtonsColor: #3b3c55;
     --pageTextColor: #C6D6DB; /* Secondary 2 1 */
     --pageBGColor: #041C23; /* Secondary 2 5 */
-    --articleBGColor: rgb(32, 32, 32);
-    --codeBGColor: rgb(20, 20, 20);
+    --articleBGColor: rgb(27,27,35);
+    --codeBGColor: rgb(20, 20, 30);
     --articleBorderColor: rgba(85,101,124,1);
     --rightColumnTextColor: rgb(207, 208, 226);
     --rightColumnBGColor: var(--pageBGColor); /* Secondary 2 5 */
@@ -23,6 +23,7 @@
     --footerBGColor: #03141a; /* Secondary 2 5 */
     --footerBorderColor: #4E6D76;
     --fakeImgBGColor: black;
+
 }
 
 body {
@@ -41,7 +42,7 @@ a:hover {
 }
 
 .header {
-    padding: 30px;
+    padding: 30px 0 10px 0;
     text-align: center;
     color: var(--headerTextColor);
     background-color: var(--headerBGColor);
@@ -51,10 +52,11 @@ a:hover {
 }
 .header h1 {
      font-size: 4em;/* Compared to body */
+    line-height: 0;
 }
 .header p {
     font-size: 1.1em;
-    letter-spacing: 0.4em;
+    letter-spacing: 0.32em;
 }
 
 .topNavigationBar {
@@ -106,7 +108,7 @@ a:hover {
     border-color: var(--topNavigationBarTextColor);
 }
 
-/* Columns container */
+/***********************Columns container**********************/
 .pageContents {
     margin-top: 5px;
     border-top: 1px solid var(--topNavigationBarButtonsBorderColor);
@@ -114,18 +116,15 @@ a:hover {
     /* Equals columns height */
     align-items: stretch;
 }
-/* Page columns */
-.contentsColumn {
-    border-left: 1px dotted var(--pageTextColor);
-    padding-left: 7px;
-}
-.menuColumn {
+/************************ Left Column *************************/
+.leftColumn {
     width: max-content;
     margin-right: 7px;
     margin-bottom: 10px;
+    padding: 1em;
     background-color: var(--topNavigationBarBGColor);
 }
-.menuColumn .article {
+.leftColumnMenu {
     /* Centers left menu horizontally in container div */
     width: max-content;
     margin: auto;
@@ -134,20 +133,25 @@ a:hover {
     line-height: 2em;
     height: 100%;
 }
-.menuColumn .article a {
+.leftColumnMenu a {
     color: var(--topNavigationBarTextColor);
     text-decoration: none;
 }
-.menuColumn .article a:hover {
+.leftColumnMenu a:hover {
     text-decoration: underline;
 }
-.menuColumn ul {
+.leftColumnMenu ul {
     color: var(--topNavigationBarTextColor);
     list-style-type: square;
     padding: 0;
     margin-left: 2em;
 }
-/* Individual article */
+/*********************** Right column *************************/
+.contentsColumn {
+    border-left: 1px dotted var(--pageTextColor);
+    padding-left: 7px;
+}
+/******************** Individual article ********************/
 .article {
     line-height: 1.5em; /* 150% */
     background-color: var(--articleBGColor);
@@ -204,6 +208,7 @@ a:hover {
     color: #00d0ff;
     font-weight: bold;
 }
+/********************************* Footer **************************************/
 .footer {
     padding: 20px 0 10px 0;
     margin-top: 5px;
@@ -215,47 +220,54 @@ a:hover {
     letter-spacing: 0.1em;
     text-align: center;
 }
-.footer .menu {
+.footerMenu {
     display: flex;
     flex-direction: row; /* Allign items in a row */
     justify-content: space-evenly; /* Main (x) axis justify left*/
     align-items: center; /* Cross (y) axis justify */
 }
-.footer .menu a {
+.footerMenu a {
     text-decoration: none;
     padding-right: 10px;
 }
-.footer .menu a:hover {
+.footerMenu a:hover {
     text-decoration: underline;
 }
-.footer .menu p {
+.footerMenu p {
     line-height: 0;
 }
-#notaBene {
-    color: rgba(242,206,255,1);
-    /*font-weight: bold;*/
-}
+/* Math equations */
 .equation {
     line-height: 50%;
-    font-family: cursive;
+    font-family: Comic Sans, Comic Sans MS, cursive;
     letter-spacing: 0.01em;
 }
-
-/* Change columns layout when screen gets smaller */
+/* 'page top' back link */
+.back {
+    text-align: center;
+}
+/****** Flexible layout ***** Change columns layout when screen gets smaller *******/
 @media screen and (max-width:800px) {
     .pageContents {
         flex-direction: column;
+        align-items: stretch;
     }
-    .menuColumn {
-        width: 100%;
+    .leftColumn {
+        margin: unset;
+        width: unset;
+        transition: 0.2s ease-in-out;
+        padding: 0 1em 0 1em;
+    }
+    .leftColumnMenu {
+        margin: unset;
+        height: 100%;
+    }
+    .leftColumnMenu ul {
         padding: 0;
-        margin-bottom: 7px;
-    }
-    .menuColumn .article {
-        margin: 0;
+        margin-left: 2em;
     }
     .contentsColumn {
-        width: 100%;
+        width: unset;
         border-left: unset;
         padding: 7px 0 0;
         border-top: 1px dotted var(--pageTextColor);
@@ -309,8 +321,8 @@ a:hover {
 <body>
 <!-----------------------------Header--------------------------------->
 <div class="header">
-    <h1>Famous Fractals</h1>
-    <p>Fractals are programmer's best toys.</p>
+    <h1 id="header">Famous Fractals</h1>
+    <p>Fractals are programmer's best toys</p>
 </div>
 <!-----------------------Top Navigation Bar--------------------------->
 <div class="topNavigationBar">
@@ -335,8 +347,8 @@ a:hover {
 </div>
 <div class="pageContents">
     <!-----------------------Left Menu--------------------------->
-    <div class="menuColumn">
-        <div class="article">
+    <div class="leftColumn">
+        <div class="leftColumnMenu">
             <h3>Fractals</h3>
             <ul>
                 <li><a href="#title1">Sierpinski triangle</a></li>
@@ -359,7 +371,7 @@ a:hover {
                 Princeton course <a href="https://introcs.cs.princeton.edu/java/home/">
                 Computer Science. An Interdisciplinary Approach</a>.
             </p>
-            <p id="notaBene">N.B. This is a flexible page. Try to resize it. When the screen width
+            <p style="color: rgba(242,206,255,1);">N.B. This is a flexible page. Try to resize it. When the screen width
             gets less then 800 and 450 pixels, page blocks are being reordered.</p>
         </div>
         <!-----------------------Sierpinsky triangle--------------------------->
@@ -435,6 +447,7 @@ a:hover {
     StdDraw.show();
 }
             </pre>
+            <p class="back"><a href="#header">page top</a></p>
         </div>
         <!---------------------------Barnsley Fern------------------------------->
         <div class="article">
@@ -488,7 +501,7 @@ a:hover {
             <p class="equation"><br>
                 <i>&fnof;</i><sub>2</sub>
             </p>
-            <dl class="equation"><dd>x<sub>>n &plus; 1</sub> = 0.85 x<sub>n</sub> &plus; 0.04 y<sub>n</sub></dd></dl>
+            <dl class="equation"><dd>x<sub>n &plus; 1</sub> = 0.85 x<sub>n</sub> &plus; 0.04 y<sub>n</sub></dd></dl>
             <dl class="equation"><dd>y<sub>n &plus; 1</sub> = &minus;0.04 x<sub>n</sub> &plus; 0.85 y<sub>n</sub> &plus; 1.6</dd></dl>
             <p>This coordinate transformation is chosen 85% of the time and maps any point inside
                 the leaflet represented by the red triangle to a point inside the opposite,
@@ -572,6 +585,7 @@ a:hover {
     }
 }
             </pre>
+            <p class="back"><a href="#header">page top</a></p>
         </div>
 
         <!-----------------------Mandelbrot Set--------------------------->
@@ -663,6 +677,7 @@ a:hover {
     }
 }
             </pre>
+            <p class="back"><a href="#header">page top</a></p>
         </div>
         <!-----------------------Julia Set--------------------------->
         <div class="article">
@@ -741,18 +756,19 @@ a:hover {
 
 }
             </pre>
+            <p class="back"><a href="#header">page top</a></p>
         </div>
     </div>
 </div>
 
 <div class="footer">
-    <div class="menu">
+    <div class="footerMenu">
         <a href="#title1" title="Sierpinski">Sierpinski&nbsp;triangle</a>
         <a href="#title2" title="Barnsley">Barnsley&nbsp;fern</a>
         <a href="#title3" title="Mandelbrot">Mandelbrot&nbsp;set</a>
         <a href="#title4" title="Julia">Julia&nbsp;set</a>
     </div>
-    <p>&copy; 2020 Alexander Shenshin for <a href="https://www.hackyourfuture.net">HackYourFuture</a></p>
+    <p>&copy; 2020 <a href="mailto: shenshin@me.com">Alexander Shenshin</a> for <a href="https://www.hackyourfuture.net">HackYourFuture</a></p>
 </div>
 
 </body>
